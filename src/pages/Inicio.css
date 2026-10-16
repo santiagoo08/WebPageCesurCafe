@@ -1,0 +1,368 @@
+/* ==========================================================================
+   Vista INICIO
+   ========================================================================== */
+
+/* ---- 1. Hero / Carrusel de proyectos ---- */
+.hero {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.hero__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: clamp(460px, 68vh, 640px);
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  z-index: -1;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  animation: hero-float 16s ease-in-out infinite alternate;
+}
+
+.hero__blob--a {
+  width: 420px;
+  height: 420px;
+  right: -80px;
+  top: -120px;
+  background: var(--accent-secondary);
+}
+
+.hero__blob--b {
+  width: 320px;
+  height: 320px;
+  right: 18%;
+  bottom: -140px;
+  background: var(--accent-primary);
+  opacity: 0.25;
+  animation-duration: 20s;
+  animation-delay: -6s;
+}
+
+.hero__blob--c {
+  width: 260px;
+  height: 260px;
+  left: 35%;
+  top: 20%;
+  background: var(--bg-primary);
+  opacity: 0.9;
+  animation-duration: 12s;
+}
+
+/* Anillos concéntricos que giran lentamente (alusión a la taza / grano) */
+.hero__rings {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  width: min(42vw, 480px);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 28px,
+    rgba(28, 22, 19, 0.07) 28px 29px
+  );
+  animation: hero-spin 60s linear infinite;
+}
+
+@keyframes hero-float {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-40px, 30px) scale(1.12); }
+}
+
+@keyframes hero-spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.hero__content {
+  max-width: 44rem;
+  animation: hero-in 0.7s ease both;
+}
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero__title {
+  margin: 0.9rem 0 1.1rem;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero__desc {
+  max-width: 32rem;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.hero__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+/* ---- 2. Propósito institucional ---- */
+.purpose__card {
+  height: 100%;
+  padding: 2.25rem 2rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-dark-card);
+  border: 1px solid var(--border-on-dark);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.purpose__card:hover {
+  border-color: var(--accent-secondary);
+  transform: translateY(-4px);
+}
+
+.purpose__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  background: rgba(184, 51, 42, 0.18);
+  color: var(--accent-primary);
+}
+
+.purpose__title {
+  margin: 0.5rem 0 0.9rem;
+  font-size: 1.9rem;
+  color: var(--text-on-dark);
+}
+
+.purpose__text {
+  margin: 0;
+  font-style: italic;
+}
+
+/* ---- 3. Banner "Conoce más sobre nosotros" ---- */
+.about-banner__card {
+  gap: 2rem;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.75rem, 5vw, 3.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.about-banner__title {
+  margin: 0.6rem 0 0.75rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+}
+
+.about-banner__text {
+  max-width: 38rem;
+  margin-bottom: 1.25rem;
+}
+
+.about-banner__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(6rem, 12vw, 9rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* ---- 4. Vista previa del repositorio ---- */
+.repo-preview {
+  padding-top: 2rem;
+}
+
+.repo-preview__head {
+  margin-bottom: 1.5rem;
+}
+
+.repo-preview__head .section-header {
+  margin-bottom: 1rem;
+}
+
+.repo-preview__head .pill-tabs {
+  margin-bottom: 1rem;
+}
+
+.repo-preview__more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* ---- 5. Resumen de servicios (Maestro-Detalle) ---- */
+.services-summary {
+  padding-top: 2rem;
+}
+
+.services-summary__list-label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.services-summary__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.services-summary__list li + li {
+  margin-top: 0.6rem;
+}
+
+.services-summary__item {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: background var(--transition-base), border-color var(--transition-base),
+    color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.services-summary__item:hover {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.services-summary__item.is-active {
+  background: var(--bg-card);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.services-summary__num {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-secondary);
+}
+
+.services-summary__item.is-active .services-summary__num {
+  color: var(--accent-primary);
+}
+
+.services-summary__name {
+  flex: 1;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.services-summary__arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  color: var(--accent-primary);
+}
+
+.services-summary__item.is-active .services-summary__arrow {
+  opacity: 1;
+  transform: none;
+}
+
+.services-summary__detail {
+  position: relative;
+  margin-top: 2.5rem;
+  padding: 4rem clamp(1.75rem, 4vw, 3rem) 2.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Círculo oscuro superpuesto en el borde superior */
+.services-summary__icon {
+  position: absolute;
+  top: 0;
+  left: clamp(1.75rem, 4vw, 3rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  color: var(--accent-secondary);
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 6px var(--bg-primary);
+}
+
+.services-summary__detail-body {
+  animation: hero-in 0.45s ease both;
+}
+
+.services-summary__detail h3 {
+  margin: 0.6rem 0 0.9rem;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.services-summary__highlights {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.services-summary__highlights li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.45rem;
+  color: var(--text-primary);
+}
+
+.services-summary__highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}

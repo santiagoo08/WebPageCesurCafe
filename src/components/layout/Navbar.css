@@ -1,0 +1,179 @@
+/* ==========================================================================
+   Navbar — fijo superior, fondo claro (--bg-card)
+   ========================================================================== */
+.site-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: box-shadow var(--transition-base);
+}
+
+.site-navbar.is-scrolled {
+  box-shadow: var(--shadow-soft);
+}
+
+.site-navbar__inner {
+  min-height: var(--navbar-height);
+}
+
+.site-navbar__brand {
+  display: inline-flex;
+  color: inherit;
+}
+
+/* ---- Logo (compartido con el Footer) ---- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo__mark {
+  flex-shrink: 0;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo__name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.logo__subtitle {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.logo--dark .logo__name {
+  color: var(--text-on-dark);
+}
+
+.logo--dark .logo__subtitle {
+  color: var(--accent-secondary);
+}
+
+/* ---- Menú ---- */
+.site-navbar__menu {
+  gap: 0.25rem;
+}
+
+.site-navbar__menu .site-navbar__link {
+  position: relative;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-base);
+}
+
+/* Indicador inferior de sección activa */
+.site-navbar__menu .site-navbar__link::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transition-base);
+}
+
+.site-navbar__menu .site-navbar__link:hover,
+.site-navbar__menu .site-navbar__link:focus-visible {
+  color: var(--text-primary);
+}
+
+.site-navbar__menu .site-navbar__link:hover::after {
+  transform: scaleX(0.4);
+}
+
+.site-navbar__menu .site-navbar__link.is-active {
+  color: var(--text-primary);
+}
+
+.site-navbar__menu .site-navbar__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ---- Botón hamburguesa ---- */
+.site-navbar__toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 11px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-base);
+}
+
+.site-navbar__toggle:hover {
+  background: var(--bg-primary);
+}
+
+.site-navbar__toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-primary);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.site-navbar__toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-navbar__toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-navbar__toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- Responsive: menú colapsable por debajo de "large" (Foundation: 64em) ---- */
+@media screen and (max-width: 63.99875em) {
+  .site-navbar__menu-wrap {
+    display: none;
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  .site-navbar__menu-wrap.is-open {
+    display: block;
+  }
+
+  .site-navbar__menu {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .site-navbar__menu .site-navbar__link {
+    padding: 0.85rem 0.25rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .site-navbar__menu .site-navbar__link::after {
+    left: 0.25rem;
+    right: auto;
+    width: 2.5rem;
+    bottom: 0.4rem;
+  }
+}

@@ -1,0 +1,211 @@
+/* ==========================================================================
+   Vista SERVICIOS
+   ========================================================================== */
+
+/* ---- 2. Tarjetas apilables ---- */
+.stack-section {
+  padding: 4rem 0 6rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12vh;
+}
+
+.stack-card__inner {
+  min-height: min(560px, 74vh);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 30px 60px -35px rgba(28, 22, 19, 0.55);
+  transform-origin: center top;
+  will-change: transform;
+}
+
+/* 50% izquierda: fondo oscuro con texto */
+.stack-card__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+
+.stack-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.stack-card__num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(246, 244, 240, 0.18);
+}
+
+.stack-card__title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--text-on-dark);
+}
+
+.stack-card__desc {
+  margin-bottom: 1.25rem;
+  color: rgba(246, 244, 240, 0.72);
+}
+
+.stack-card__list {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.stack-card__list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-on-dark);
+}
+
+.stack-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 2px solid var(--accent-secondary);
+}
+
+.stack-card__text .cc-btn {
+  margin-top: auto;
+}
+
+/* 50% derecha: fondo claro para video o imagen */
+.stack-card__visual {
+  display: flex;
+  padding: 1.25rem;
+  background: var(--bg-card);
+}
+
+.stack-card__media {
+  flex: 1;
+  min-height: 280px;
+  border-radius: calc(var(--radius-lg) - 8px);
+}
+
+/* ---- 3. Testimonios ---- */
+.testimonials__track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+
+.testimonials__track::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial {
+  flex: 0 0 min(88%, 400px);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Parte superior clara */
+.testimonial__top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 1.5rem 1.6rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.testimonial__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.testimonial__category {
+  color: var(--accent-primary);
+}
+
+.testimonial__link {
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.testimonial__link:hover {
+  background: var(--bg-dark);
+  border-color: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+
+/* Parte inferior oscura */
+.testimonial__bottom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.6rem 1.9rem;
+  background: var(--bg-dark-card);
+}
+
+.testimonial__quote-icon {
+  color: var(--accent-secondary);
+  margin-bottom: 1rem;
+}
+
+.testimonial__quote {
+  margin: 0 0 1.75rem;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-on-dark);
+}
+
+.testimonial__author {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+.testimonial__author strong {
+  color: var(--text-on-dark);
+}
+
+.testimonial__author span {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(246, 244, 240, 0.6);
+}
+
+.testimonials__controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}

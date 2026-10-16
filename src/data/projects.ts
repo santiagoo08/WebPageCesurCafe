@@ -1,0 +1,29 @@
+// Proyectos destacados del carrusel Hero (Inicio).
+
+export interface FeaturedProject {
+  id: string;
+  title: string;
+  description: string;
+  /** Ruta opcional a un video de fondo (p. ej. `/videos/monitoreo.mp4`). */
+  video?: string;
+}
+
+export const FEATURED_PROJECTS: FeaturedProject[] = [
+  {
+    id: 'monitoreo-agricola',
+    title: 'Sistema de monitoreo agrícola',
+    description: 'Sensores de campo aplicados al seguimiento de cultivos en la región.',
+  },
+  {
+    id: 'fermentacion-controlada',
+    title: 'Fermentación controlada de cafés especiales',
+    description:
+      'Protocolos de fermentación que potencian el perfil sensorial del café huilense.',
+  },
+  {
+    id: 'cartillas-rurales',
+    title: 'Cartillas rurales digitales',
+    description:
+      'Material formativo accesible para las familias caficultoras del sur del Huila.',
+  },
+];

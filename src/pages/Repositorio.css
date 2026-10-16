@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Vista REPOSITORIO
+   ========================================================================== */
+.explorer__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.explorer__title {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+}
+
+.explorer__search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 0 1 380px;
+  padding: 0 1.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.explorer__search:focus-within {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 4px rgba(200, 138, 75, 0.15);
+}
+
+/* Anula los estilos de input de Foundation */
+.explorer__search input {
+  flex: 1;
+  height: 3rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.explorer__search input:focus {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.explorer__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.explorer__count {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.explorer__empty {
+  padding: 4rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--border-subtle);
+  text-align: center;
+}
+
+.explorer__more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}

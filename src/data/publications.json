@@ -1,0 +1,132 @@
+[
+  {
+    "id": "pub-01",
+    "title": "Caracterización de suelos cafeteros",
+    "summary": "Estudio fisicoquímico y microbiológico de suelos en fincas cafeteras del sur del Huila.",
+    "area": "MICROBIOLOGÍA",
+    "type": "Artículos",
+    "status": "Finalizado",
+    "year": 2026,
+    "author": "Equipo de Microbiología"
+  },
+  {
+    "id": "pub-02",
+    "title": "Procesos de fermentación controlada",
+    "summary": "Evaluación de tiempos, temperatura y pH en la fermentación de cafés especiales.",
+    "area": "FITOSANIDAD",
+    "type": "Artículos",
+    "status": "Finalizado",
+    "year": 2026,
+    "author": "Equipo de Poscosecha"
+  },
+  {
+    "id": "pub-03",
+    "title": "Análisis de suelos y fitosanidad",
+    "summary": "Guía técnica sobre la relación entre nutrición del suelo y la sanidad del cultivo de café.",
+    "area": "SUELOS",
+    "type": "Libros",
+    "status": "Finalizado",
+    "year": 2026,
+    "author": "Dra. Laura Sofía"
+  },
+  {
+    "id": "pub-04",
+    "title": "Sistema de monitoreo agrícola",
+    "summary": "Red de sensores de campo para el seguimiento de humedad, temperatura y clima en cafetales.",
+    "area": "AGRICULTURA",
+    "type": "Investigaciones",
+    "status": "Activo",
+    "year": 2026,
+    "author": "MSc. Juan David"
+  },
+  {
+    "id": "pub-05",
+    "title": "Cartillas rurales digitales",
+    "summary": "Material didáctico ilustrado sobre buenas prácticas agrícolas para familias caficultoras.",
+    "area": "EDUCACIÓN RURAL",
+    "type": "Cartillas Rurales",
+    "status": "Activo",
+    "year": 2026,
+    "author": "Equipo de Extensión"
+  },
+  {
+    "id": "pub-06",
+    "title": "Levaduras nativas en la fermentación del café",
+    "summary": "Aislamiento e identificación de levaduras nativas con potencial para mejorar el perfil sensorial.",
+    "area": "MICROBIOLOGÍA",
+    "type": "Investigaciones",
+    "status": "Activo",
+    "year": 2025,
+    "author": "Biól. Valentina Ruiz"
+  },
+  {
+    "id": "pub-07",
+    "title": "Manejo integrado de la broca del café",
+    "summary": "Cartilla práctica con estrategias de control cultural, biológico y monitoreo de la broca.",
+    "area": "FITOSANIDAD",
+    "type": "Cartillas Rurales",
+    "status": "Finalizado",
+    "year": 2025,
+    "author": "Equipo de Extensión"
+  },
+  {
+    "id": "pub-08",
+    "title": "Fertilidad de suelos en la cordillera oriental",
+    "summary": "Mapeo de fertilidad y recomendaciones de enmiendas para suelos de ladera cafeteros.",
+    "area": "SUELOS",
+    "type": "Artículos",
+    "status": "Finalizado",
+    "year": 2025,
+    "author": "Dra. Laura Sofía"
+  },
+  {
+    "id": "pub-09",
+    "title": "Café de especialidad: de la finca a la taza",
+    "summary": "Libro de referencia sobre cosecha, beneficio, secado y evaluación sensorial del café.",
+    "area": "AGRICULTURA",
+    "type": "Libros",
+    "status": "Finalizado",
+    "year": 2024,
+    "author": "Equipo CESURCAFÉ"
+  },
+  {
+    "id": "pub-10",
+    "title": "Jóvenes rurales y relevo generacional cafetero",
+    "summary": "Investigación sobre las motivaciones y retos de los jóvenes para continuar en la caficultura.",
+    "area": "EDUCACIÓN RURAL",
+    "type": "Investigaciones",
+    "status": "Finalizado",
+    "year": 2024,
+    "author": "Equipo de Extensión"
+  },
+  {
+    "id": "pub-11",
+    "title": "Secado solar de café pergamino",
+    "summary": "Cartilla sobre construcción y uso eficiente de secadores solares parabólicos.",
+    "area": "AGRICULTURA",
+    "type": "Cartillas Rurales",
+    "status": "Finalizado",
+    "year": 2024,
+    "author": "MSc. Juan David"
+  },
+  {
+    "id": "pub-12",
+    "title": "Roya del cafeto y variabilidad climática",
+    "summary": "Análisis de la incidencia de roya frente a cambios de temperatura y precipitación en el Huila.",
+    "area": "FITOSANIDAD",
+    "type": "Artículos",
+    "status": "Finalizado",
+    "year": 2023,
+    "author": "Equipo de Fitosanidad"
+  },
+  {
+    "id": "pub-13",
+    "title": "Microbiota del grano durante el secado",
+    "summary": "Dinámica de hongos y bacterias en el grano de café durante distintos métodos de secado.",
+    "area": "MICROBIOLOGÍA",
+    "type": "Libros",
+    "status": "Activo",
+    "year": 2023,
+    "author": "Biól. Valentina Ruiz"
+  }
+]

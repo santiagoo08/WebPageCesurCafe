@@ -1,0 +1,94 @@
+.pub-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Portada con 2 etiquetas en las esquinas superiores */
+.pub-card__cover {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  height: 180px;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 80% 110%, var(--tone-a, var(--accent-secondary)) 0, transparent 60%),
+    linear-gradient(135deg, var(--tone-b, var(--bg-dark-card)), var(--bg-dark));
+  overflow: hidden;
+}
+
+.pub-card__cover::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  bottom: -50px;
+  width: 140px;
+  height: 190px;
+  border-radius: 50%;
+  border: 2px solid rgba(246, 244, 240, 0.18);
+  transform: rotate(-28deg);
+  box-shadow: inset 18px 0 0 -16px rgba(246, 244, 240, 0.18);
+}
+
+.pub-card__cover .pill {
+  position: relative;
+  z-index: 1;
+}
+
+.pub-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.4rem 1.4rem 1.2rem;
+}
+
+.pub-card__status {
+  align-self: flex-start;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pub-card__status--finalizado {
+  background: rgba(28, 22, 19, 0.07);
+  color: var(--text-secondary);
+}
+
+.pub-card__status--activo {
+  background: rgba(184, 51, 42, 0.1);
+  color: var(--accent-primary);
+}
+
+.pub-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.pub-card__summary {
+  font-size: 0.93rem;
+  margin: 0 0 1.25rem;
+}
+
+.pub-card__meta {
+  margin: auto 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}

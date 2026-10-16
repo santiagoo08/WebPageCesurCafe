@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Estilos globales — se cargan DESPUÉS de Foundation para sobrescribir
+   sus valores por defecto con la paleta "Tostión Editorial & Cereza".
+   Las variables se cargan desde ./styles/variables.css (ver main.tsx).
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: inherit;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--accent-primary);
+  transition: color var(--transition-base);
+}
+
+a:hover,
+a:focus {
+  color: var(--text-primary);
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: var(--text-on-dark);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 3px;
+}
+
+/* ---- Layout de la app ---- */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1 0 auto;
+}
+
+/* ---- Utilidades reutilizables ---- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* Placeholder temporal para vistas aún no construidas */
+.page-placeholder {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.page-placeholder h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  margin: 0.75rem 0;
+}
