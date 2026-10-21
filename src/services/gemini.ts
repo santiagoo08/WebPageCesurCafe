@@ -141,8 +141,7 @@ export async function askGemini(
   prompt: string,
   history: Array<{ role: 'user' | 'model'; text: string }> = []
 ): Promise<string> {
-  const apiKey =
-    import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyAIXFpe2rZTVurQxqYnsryZZhulJewx7eA';
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
   if (!apiKey || apiKey.trim() === '') {
     await new Promise((resolve) => setTimeout(resolve, 600));

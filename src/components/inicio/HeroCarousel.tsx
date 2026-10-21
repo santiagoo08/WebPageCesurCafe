@@ -43,7 +43,7 @@ export default function HeroCarousel() {
 
           <div className="hero__content" key={project.id} aria-live="polite">
             <span className="eyebrow">Proyecto {String(index + 1).padStart(2, '0')}</span>
-            <h1 className="hero__title">{project.title}</h1>
+            <h2 className="hero__title">{project.title}</h2>
             <p className="hero__desc">{project.description}</p>
           </div>
 

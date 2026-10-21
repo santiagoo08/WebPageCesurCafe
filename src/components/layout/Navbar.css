@@ -7,7 +7,8 @@
   z-index: 100;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-subtle);
-  transition: box-shadow var(--transition-base);
+  transition: box-shadow var(--transition-base), background-color var(--transition-base),
+    border-color var(--transition-base), backdrop-filter var(--transition-base);
 }
 
 .site-navbar.is-scrolled {
@@ -175,5 +176,79 @@
     right: auto;
     width: 2.5rem;
     bottom: 0.4rem;
+  }
+}
+
+
+/* ==========================================================================
+   Variante transparente sobre el video de fondo de Inicio (cafe.md §2)
+   Se activa cuando <body> tiene la clase `has-video-bg` (ver VideoBackground).
+   ========================================================================== */
+.has-video-bg .site-navbar {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+/* Al bajar por la página: desenfoque translúcido que no tapa el video */
+.has-video-bg .site-navbar.is-scrolled,
+.has-video-bg .site-navbar.is-menu-open {
+  background: rgba(28, 22, 19, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: none;
+}
+
+/* Logo en Blanco Puro */
+.has-video-bg .site-navbar .logo__name {
+  color: #FFFFFF;
+}
+
+.has-video-bg .site-navbar .logo__subtitle {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* 5 enlaces en Blanco Puro */
+.has-video-bg .site-navbar__menu .site-navbar__link,
+.has-video-bg .site-navbar__menu .site-navbar__link.is-active {
+  color: #FFFFFF;
+}
+
+/* Hover: acento Caramelo */
+.has-video-bg .site-navbar__menu .site-navbar__link:hover,
+.has-video-bg .site-navbar__menu .site-navbar__link:focus-visible {
+  color: var(--accent-secondary);
+}
+
+.has-video-bg .site-navbar__menu .site-navbar__link:hover::after {
+  background: var(--accent-secondary);
+}
+
+/* Sección activa: línea indicadora Rojo Cereza */
+.has-video-bg .site-navbar__menu .site-navbar__link.is-active::after,
+.has-video-bg .site-navbar__menu .site-navbar__link.is-active:hover::after {
+  background: var(--accent-primary);
+}
+
+/* Botón hamburguesa en blanco */
+.has-video-bg .site-navbar__toggle span {
+  background: #FFFFFF;
+}
+
+.has-video-bg .site-navbar__toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media screen and (max-width: 63.99875em) {
+  .has-video-bg .site-navbar__menu .site-navbar__link {
+    border-top-color: rgba(255, 255, 255, 0.14);
+  }
+}
+
+/* Navegadores sin backdrop-filter: fondo algo más opaco al hacer scroll */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .has-video-bg .site-navbar.is-scrolled,
+  .has-video-bg .site-navbar.is-menu-open {
+    background: rgba(28, 22, 19, 0.85);
   }
 }

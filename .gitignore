@@ -7,19 +7,42 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencias y compilación
 node_modules
 dist
 dist-ssr
+.vite
+*.tsbuildinfo
+coverage
+.cache
+
+# Variables de entorno y claves de API (NUNCA subir al repositorio)
 *.local
 .env
 .env.*
 !.env.example
+*.key
+*.pem
+secrets.*
 
-# Editor directories and files
+# Instrucciones y contexto de IA / desarrollo local
+AGENTS.md
+CLAUDE.md
+cafe.md
+context.md
+.gemini/
+.agent/
+.agents/
+.cursor/
+.claude/
+
+# Editor y archivos del sistema operativo
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
+Desktop.ini
 *.suo
 *.ntvs*
 *.njsproj

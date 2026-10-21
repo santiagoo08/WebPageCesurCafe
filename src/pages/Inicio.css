@@ -2,6 +2,135 @@
    Vista INICIO
    ========================================================================== */
 
+/* ---- 0.a Video cafe.mp4 como fondo global fijo de toda la vista (cafe.md §1) ---- */
+.page-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg-dark); /* Respaldo mientras carga el video */
+}
+
+.page-video-bg__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-video-bg__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 22, 19, 0.65); /* Espresso Profundo con opacidad */
+}
+
+/* ---- 0.b Portada de bienvenida (transparente sobre el video) ---- */
+.hero-video-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--navbar-height));
+  background: transparent;
+  color: #FFFFFF;
+}
+
+.hero-video-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.hero-video__title {
+  margin: 1rem 0 1.25rem;
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.hero-video__desc {
+  max-width: 38rem;
+  margin: 0 auto;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-video__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2.25rem;
+}
+
+.hero-video__btn-ghost {
+  background: transparent;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-video__btn-ghost:hover,
+.hero-video__btn-ghost:focus {
+  color: var(--bg-dark);
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+}
+
+/* Indicador inferior de scroll */
+.hero-video__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-video__scroll-line {
+  position: relative;
+  width: 1px;
+  height: 42px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.hero-video__scroll-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -50%;
+  width: 100%;
+  height: 50%;
+  background: var(--accent-secondary);
+  animation: hero-video-scroll 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-video-scroll {
+  to { top: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video__scroll-line::after {
+    animation: none;
+  }
+}
+
 /* ---- 1. Hero / Carrusel de proyectos ---- */
 .hero {
   padding-top: 2.5rem;
@@ -365,4 +494,147 @@
   height: 0.5rem;
   border-radius: 50%;
   background: var(--accent-primary);
+}
+
+
+/* ==========================================================================
+   6. Integración con el video de fondo global (cafe.md §1)
+   Todas las secciones del Index son transparentes y las tarjetas usan un
+   efecto traslúcido (backdrop-filter) para apreciar el video al hacer scroll.
+   ========================================================================== */
+.inicio-page {
+  --glass-dark: rgba(28, 22, 19, 0.45);       /* Espresso traslúcido */
+  --glass-dark-card: rgba(42, 34, 30, 0.55);  /* Tostión Oscura traslúcida */
+  --glass-light: rgba(255, 255, 255, 0.88);   /* Blanco Puro traslúcido (mantiene el contraste) */
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-blur: blur(8px);
+  color: var(--text-on-dark);
+}
+
+/* Contenedores principales: fondo transparente */
+.inicio-page > section,
+.inicio-page .on-dark {
+  background: transparent;
+}
+
+/* Cabeceras de sección sobre el video */
+.inicio-page .section-header h2 {
+  color: #FFFFFF;
+}
+
+.inicio-page .section-header p {
+  color: rgba(246, 244, 240, 0.78);
+}
+
+/* ---- Hero / Carrusel de proyectos: cristal oscuro ---- */
+.inicio-page .hero__box {
+  background: var(--glass-dark);
+  border-color: var(--glass-border);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+
+.inicio-page .hero__title {
+  color: #FFFFFF;
+}
+
+.inicio-page .hero__desc {
+  color: rgba(246, 244, 240, 0.82);
+}
+
+.inicio-page .hero__blob--c {
+  display: none; /* Mancha clara pensada para fondo blanco */
+}
+
+.inicio-page .hero__blob--a {
+  opacity: 0.3;
+}
+
+.inicio-page .hero__rings {
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 28px,
+    rgba(246, 244, 240, 0.08) 28px 29px
+  );
+}
+
+.inicio-page .hero .carousel-btn {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+}
+
+.inicio-page .hero .carousel-btn:hover:not(:disabled) {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.inicio-page .hero .carousel-dots__dot {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.inicio-page .hero .carousel-dots__dot.is-active {
+  background: var(--accent-primary);
+}
+
+/* ---- Propósito institucional: tarjetas oscuras traslúcidas ---- */
+.inicio-page .purpose__card {
+  background: var(--glass-dark-card);
+  border-color: var(--glass-border);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+
+.inicio-page .purpose__card:hover {
+  border-color: var(--accent-secondary);
+}
+
+/* ---- Tarjetas claras: cristal blanco que conserva el contraste ---- */
+.inicio-page .about-banner__card,
+.inicio-page .pub-card,
+.inicio-page .pill-tabs,
+.inicio-page .services-summary__detail,
+.inicio-page .services-summary__item.is-active {
+  background: var(--glass-light);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  color: var(--text-primary);
+}
+
+/* ---- Vista previa del repositorio ---- */
+.inicio-page .repo-preview__more .cc-btn--dark {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Resumen de servicios ---- */
+.inicio-page .services-summary__list-label {
+  color: rgba(246, 244, 240, 0.7);
+}
+
+.inicio-page .services-summary__item {
+  color: rgba(246, 244, 240, 0.78);
+}
+
+.inicio-page .services-summary__item:hover {
+  color: #FFFFFF;
+  border-color: var(--glass-border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.inicio-page .services-summary__item.is-active {
+  border-color: transparent;
+  color: var(--text-primary);
+}
+
+.inicio-page .services-summary__icon {
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.18);
+}
+
+/* Navegadores sin backdrop-filter: tarjetas más opacas para mantener legibilidad */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .inicio-page {
+    --glass-dark: rgba(28, 22, 19, 0.82);
+    --glass-dark-card: rgba(42, 34, 30, 0.9);
+    --glass-light: rgba(255, 255, 255, 0.96);
+  }
 }

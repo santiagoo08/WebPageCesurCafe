@@ -12,6 +12,7 @@ export default function Navbar() {
   const closeMenu = () => setIsOpen(false);
 
   // Sombra sutil cuando el usuario hace scroll.
+  // Sobre el video de Inicio (body.has-video-bg) activa además el desenfoque translúcido.
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8);
     onScroll();
@@ -20,7 +21,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`site-navbar${isScrolled ? ' is-scrolled' : ''}`}>
+    <header
+      className={`site-navbar${isScrolled ? ' is-scrolled' : ''}${isOpen ? ' is-menu-open' : ''}`}
+    >
       <div className="grid-container">
         <nav
           className="grid-x align-middle align-justify site-navbar__inner"
