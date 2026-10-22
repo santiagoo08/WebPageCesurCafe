@@ -1,4 +1,43 @@
-// Contenido institucional: propósito, servicios, equipo, testimonios y contacto.
+// Catálogo estático de datos institucionales, navegación, proyectos y publicaciones.
+import rawPublications from './publications.json';
+
+// ---------------------------------------------------------------------------
+// Navegación y Redes Sociales
+// ---------------------------------------------------------------------------
+export const NAV_ITEMS = [
+  { label: 'Inicio', path: '/' },
+  { label: 'Nosotros', path: '/nosotros' },
+  { label: 'Servicios', path: '/servicios' },
+  { label: 'Repositorio', path: '/repositorio' },
+  { label: 'Contacto', path: '/contacto' },
+];
+
+export const SOCIAL_LINKS = [
+  { label: 'Instagram', href: 'https://www.instagram.com/' },
+  { label: 'Facebook', href: 'https://www.facebook.com/' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
+];
+
+// ---------------------------------------------------------------------------
+// Inicio: Proyectos destacados y Propósito institucional
+// ---------------------------------------------------------------------------
+export const FEATURED_PROJECTS = [
+  {
+    id: 'monitoreo-agricola',
+    title: 'Sistema de monitoreo agrícola',
+    description: 'Sensores de campo aplicados al seguimiento de cultivos en la región.',
+  },
+  {
+    id: 'fermentacion-controlada',
+    title: 'Fermentación controlada de cafés especiales',
+    description: 'Protocolos de fermentación que potencian el perfil sensorial del café huilense.',
+  },
+  {
+    id: 'cartillas-rurales',
+    title: 'Cartillas rurales digitales',
+    description: 'Material formativo accesible para las familias caficultoras del sur del Huila.',
+  },
+];
 
 export const PURPOSE_CARDS = [
   {
@@ -22,7 +61,7 @@ export const PURPOSE_CARDS = [
 ];
 
 // ---------------------------------------------------------------------------
-// Servicios (usados en el Maestro-Detalle de Inicio y en la vista Servicios)
+// Servicios y Testimonios
 // ---------------------------------------------------------------------------
 export const SERVICES = [
   {
@@ -46,7 +85,7 @@ export const SERVICES = [
     tag: 'Innovación poscosecha',
     title: 'Optimización de Procesos de Fermentación',
     description:
-      'Diseñamos y validamos protocolos de fermentación controlada —monitoreando pH, temperatura y grados Brix— que reducen defectos y resaltan notas diferenciadoras en cafés especiales.',
+      'Diseñamos y validamos protocolos de fermentación controlada -monitoreando pH, temperatura y grados Brix- que reducen defectos y resaltan notas diferenciadoras en cafés especiales.',
     highlights: [
       'Monitoreo de variables de fermentación',
       'Selección de microorganismos benéficos',
@@ -72,32 +111,6 @@ export const SERVICES = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// Nosotros
-// ---------------------------------------------------------------------------
-export const WHO_WE_ARE_PANELS = [
-  { title: 'Investigación', caption: 'Ciencia aplicada a la cadena del café', tone: 'tone-microbiologia' },
-  { title: 'Laboratorio', caption: 'Calidad física y sensorial', tone: 'tone-sensorial' },
-  { title: 'Territorio', caption: 'Fincas y montañas del Huila', tone: 'tone-fitosanidad' },
-  { title: 'Comunidad', caption: 'Caficultores y jóvenes rurales', tone: 'tone-educacion-rural' },
-];
-
-export const TIMELINE_MILESTONES = [
-  { id: 1, year: '', title: '', text: '' },
-  { id: 2, year: '', title: '', text: '' },
-  { id: 3, year: '', title: '', text: '' },
-  { id: 4, year: '', title: '', text: '' },
-];
-
-export const RESEARCHERS = [
-  { id: 'laura-sofia', name: 'Dra. Laura Sofía', role: 'Líder de Sostenibilidad', initials: 'LS' },
-  { id: 'juan-david', name: 'MSc. Juan David', role: 'Investigador de Poscosecha', initials: 'JD' },
-  { id: 'valentina-ruiz', name: 'Biól. Valentina Ruiz', role: 'Analista de Microbiología', initials: 'VR' },
-];
-
-// ---------------------------------------------------------------------------
-// Servicios – Testimonios
-// ---------------------------------------------------------------------------
 export const TESTIMONIALS = [
   {
     id: 't1',
@@ -134,7 +147,30 @@ export const TESTIMONIALS = [
 ];
 
 // ---------------------------------------------------------------------------
-// Contacto
+// Nosotros
+// ---------------------------------------------------------------------------
+export const WHO_WE_ARE_PANELS = [
+  { title: 'Investigación', caption: 'Ciencia aplicada a la cadena del café', tone: 'tone-microbiologia' },
+  { title: 'Laboratorio', caption: 'Calidad física y sensorial', tone: 'tone-sensorial' },
+  { title: 'Territorio', caption: 'Fincas y montañas del Huila', tone: 'tone-fitosanidad' },
+  { title: 'Comunidad', caption: 'Caficultores y jóvenes rurales', tone: 'tone-educacion-rural' },
+];
+
+export const TIMELINE_MILESTONES = [
+  { id: 1, year: '', title: '', text: '' },
+  { id: 2, year: '', title: '', text: '' },
+  { id: 3, year: '', title: '', text: '' },
+  { id: 4, year: '', title: '', text: '' },
+];
+
+export const RESEARCHERS = [
+  { id: 'laura-sofia', name: 'Dra. Laura Sofía', role: 'Líder de Sostenibilidad', initials: 'LS' },
+  { id: 'juan-david', name: 'MSc. Juan David', role: 'Investigador de Poscosecha', initials: 'JD' },
+  { id: 'valentina-ruiz', name: 'Biól. Valentina Ruiz', role: 'Analista de Microbiología', initials: 'VR' },
+];
+
+// ---------------------------------------------------------------------------
+// Contacto y Líneas de investigación
 // ---------------------------------------------------------------------------
 export const CONTACT_INFO = {
   email: 'cesurcafe@usco.edu.co',
@@ -149,3 +185,23 @@ export const RESEARCH_LINES = [
   'Agricultura de precisión y monitoreo con sensores',
   'Educación rural y transferencia tecnológica',
 ];
+
+// ---------------------------------------------------------------------------
+// Publicaciones y utilidades de texto
+// ---------------------------------------------------------------------------
+export const PUBLICATIONS = rawPublications;
+
+export function typeLabel(type) {
+  return type === 'Investigaciones' ? 'Investigación' : type;
+}
+
+export function normalizeText(value) {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+export function slugify(value) {
+  return normalizeText(value).trim().replace(/\s+/g, '-');
+}

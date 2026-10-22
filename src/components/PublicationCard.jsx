@@ -1,5 +1,4 @@
-import { slugify, typeLabel } from '../../data/publications';
-import './PublicationCard.css';
+import { slugify, typeLabel } from '../data/institutional';
 
 export default function PublicationCard({ publication, showStatus = false }) {
   const { title, summary, area, type, status, year, author } = publication;

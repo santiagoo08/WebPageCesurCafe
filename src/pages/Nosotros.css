@@ -120,6 +120,12 @@
 }
 
 /* ---- 2. Línea del tiempo (estructura) ---- */
+/* Evita scroll horizontal mientras las tarjetas entran desde los lados */
+.timeline-section,
+.researchers {
+  overflow-x: clip;
+}
+
 .timeline {
   position: relative;
   max-width: 64rem;
@@ -356,21 +362,17 @@
   color: var(--text-on-dark);
   overflow: hidden;
   opacity: 0.55;
-  transform: scale(0.9);
+  /* `scale` (y no `transform`) para no chocar con el deslizamiento GSAP en X */
+  scale: 0.9;
   cursor: pointer;
-  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.45s ease;
-  animation: researcher-in 0.45s ease both;
+  transition: opacity 0.5s ease, scale 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
 }
 
 .researcher-card.is-active {
   opacity: 1;
-  transform: scale(1);
+  scale: 1;
   cursor: default;
   box-shadow: 0 30px 60px -30px rgba(28, 22, 19, 0.6);
-}
-
-@keyframes researcher-in {
-  from { opacity: 0; }
 }
 
 .researcher-card__photo {

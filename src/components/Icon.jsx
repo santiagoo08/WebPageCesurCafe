@@ -1,4 +1,4 @@
-// Íconos SVG en línea (trazo con currentColor).
+// Íconos SVG en línea (trazo o relleno con currentColor).
 
 const PATHS = {
   target: (
@@ -60,13 +60,31 @@ const PATHS = {
   ),
   send: <path d="M4 12 20 4l-6 16-2.5-6.5L4 12z" />,
   close: <path d="M6 6l12 12M18 6 6 18" />,
-  chat: (
-    <path d="M5 18.5V6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7a2.5 2.5 0 0 1-2.5 2.5H9l-4 2.5z" />
-  ),
   quote: (
     <path
       d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5V13h4.5v4H5M20 7h-3.5A2.5 2.5 0 0 0 14 9.5V13h4.5v4H15"
       strokeLinejoin="round"
+    />
+  ),
+  Instagram: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
+    </>
+  ),
+  Facebook: (
+    <path
+      d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3z"
+      fill="currentColor"
+      stroke="none"
+    />
+  ),
+  LinkedIn: (
+    <path
+      d="M6.9 8.8H3.8V20h3.1V8.8zM5.4 3.8a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6zM20.2 13.6c0-3-1.6-4.9-4.2-4.9-1.5 0-2.4.8-2.9 1.5V8.8H10V20h3.1v-5.9c0-1.5.6-2.6 2-2.6s1.9 1 1.9 2.6V20h3.1v-6.4z"
+      fill="currentColor"
+      stroke="none"
     />
   ),
 };

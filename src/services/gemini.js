@@ -1,6 +1,11 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { CONTACT_INFO, PURPOSE_CARDS, RESEARCH_LINES, SERVICES } from '../data/institutional';
-import { PUBLICATIONS } from '../data/publications';
+import {
+  CONTACT_INFO,
+  PUBLICATIONS,
+  PURPOSE_CARDS,
+  RESEARCH_LINES,
+  SERVICES,
+} from '../data/institutional';
 
 /**
  * System Prompt cerrado al contexto estricto de CESURCAFÉ con regla de retorno al Menú Principal.

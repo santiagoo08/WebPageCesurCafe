@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { askGemini } from '../services/gemini';
-import { ChatContext } from './chatContextDef';
+
+const ChatContext = createContext(undefined);
 
 function formatTime(date = new Date()) {
   return date.toLocaleTimeString('es-CO', {
@@ -46,45 +47,42 @@ export function ChatProvider({ children }) {
 
       const reply = await askGemini(trimmed, history);
 
-      const botMsg = {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: reply,
-        time: formatTime(),
-      };
-
-      setMessages((prev) => [...prev, botMsg]);
+      setMessages((prev) => [
+        ...prev,
+        { id: `bot-${Date.now()}`, sender: 'bot', text: reply, time: formatTime() },
+      ]);
     } catch (err) {
       console.error('Error enviando mensaje a CaféBot:', err);
-      const errorMsg = {
-        id: `bot-err-${Date.now()}`,
-        sender: 'bot',
-        text: 'Ocurrió un problema temporal al procesar tu solicitud. Por favor intenta de nuevo.',
-        time: formatTime(),
-      };
-      setMessages((prev) => [...prev, errorMsg]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `bot-err-${Date.now()}`,
+          sender: 'bot',
+          text: 'Ocurrió un problema temporal al procesar tu solicitud. Por favor intenta de nuevo.',
+          time: formatTime(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
   const toggleWidget = () => setIsWidgetOpen((open) => !open);
-  const openWidget = () => setIsWidgetOpen(true);
   const closeWidget = () => setIsWidgetOpen(false);
 
   return (
     <ChatContext.Provider
-      value={{
-        messages,
-        isLoading,
-        isWidgetOpen,
-        sendMessage,
-        toggleWidget,
-        openWidget,
-        closeWidget,
-      }}
+      value={{ messages, isLoading, isWidgetOpen, sendMessage, toggleWidget, closeWidget }}
     >
       {children}
     </ChatContext.Provider>
   );
+}
+
+export function useChat() {
+  const ctx = useContext(ChatContext);
+  if (!ctx) {
+    throw new Error('useChat debe ser usado dentro de un ChatProvider');
+  }
+  return ctx;
 }
