@@ -44,7 +44,7 @@ REGLA FUNDAMENTAL DE ALCANCE Y RETORNO AL MENÚ PRINCIPAL:
 /**
  * Respuestas precalculadas de respaldo si la API externa no está disponible o falla temporalmente.
  */
-function getFallbackResponse(prompt: string): string {
+function getFallbackResponse(prompt) {
   const query = prompt.toLowerCase().trim();
 
   // Opción 1 o Servicios
@@ -137,10 +137,7 @@ function getFallbackResponse(prompt: string): string {
 /**
  * Consulta la API de Google Gemini o responde con fallback contextual.
  */
-export async function askGemini(
-  prompt: string,
-  history: Array<{ role: 'user' | 'model'; text: string }> = []
-): Promise<string> {
+export async function askGemini(prompt, history = []) {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
   if (!apiKey || apiKey.trim() === '') {
@@ -154,7 +151,7 @@ export async function askGemini(
   const validHistory = firstUserIdx >= 0 ? history.slice(firstUserIdx) : [];
 
   const formattedHistory = validHistory.map((msg) => ({
-    role: msg.role === 'user' ? ('user' as const) : ('model' as const),
+    role: msg.role === 'user' ? 'user' : 'model',
     parts: [{ text: msg.text }],
   }));
 

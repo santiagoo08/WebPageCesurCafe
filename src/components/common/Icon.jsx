@@ -1,28 +1,6 @@
 // Íconos SVG en línea (trazo con currentColor).
-import type { ReactNode } from 'react';
 
-export type IconName =
-  | 'target'
-  | 'compass'
-  | 'award'
-  | 'lab'
-  | 'fermentation'
-  | 'training'
-  | 'search'
-  | 'mail'
-  | 'pin'
-  | 'send'
-  | 'close'
-  | 'chat'
-  | 'quote';
-
-interface IconProps {
-  name: IconName;
-  size?: number;
-  className?: string;
-}
-
-const PATHS: Record<IconName, ReactNode> = {
+const PATHS = {
   target: (
     <>
       <circle cx="12" cy="12" r="9" />
@@ -93,7 +71,7 @@ const PATHS: Record<IconName, ReactNode> = {
   ),
 };
 
-export default function Icon({ name, size = 24, className }: IconProps) {
+export default function Icon({ name, size = 24, className }) {
   return (
     <svg
       className={className}

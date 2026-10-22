@@ -1,11 +1,5 @@
-interface LogoProps {
-  /** `light` para fondos claros, `dark` para fondos oscuros. */
-  variant?: 'light' | 'dark';
-  showSubtitle?: boolean;
-}
-
 /** Identidad CESURCAFÉ: grano de café + logotipo. */
-export default function Logo({ variant = 'light', showSubtitle = true }: LogoProps) {
+export default function Logo({ variant = 'light', showSubtitle = true }) {
   return (
     <span className={`logo logo--${variant}`}>
       <svg

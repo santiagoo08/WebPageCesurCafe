@@ -4,16 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface MediaVisualProps {
-  /** Clase de tono (`tone-*`) para variar los colores del marcador. */
-  tone?: string;
-  image?: string;
-  video?: string;
-  label?: string;
-  className?: string;
-  alt?: string;
-}
-
 /**
  * Contenedor visual para imagen o video con control de reproducción
  * automática al hacer scroll (GSAP ScrollTrigger).
@@ -25,8 +15,8 @@ export default function MediaVisual({
   label,
   className = '',
   alt = '',
-}: MediaVisualProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+}) {
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const v = videoRef.current;

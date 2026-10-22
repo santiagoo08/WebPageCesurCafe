@@ -5,8 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CoffeeMorph() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef(null);
+  const stageRef = useRef(null);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -76,7 +76,7 @@ export default function CoffeeMorph() {
         .to('.morph-stage--cup', { opacity: 1, scale: 1, duration: 1 }, '<');
 
       // 4. Activación de nodos al pasar el transformador
-      const nodes = gsap.utils.toArray<HTMLElement>('.timeline__node');
+      const nodes = gsap.utils.toArray('.timeline__node');
       nodes.forEach((node) => {
         ScrollTrigger.create({
           trigger: node,

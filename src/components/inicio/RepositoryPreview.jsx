@@ -1,16 +1,13 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
-import type { PublicationType } from '../../data/publications';
 import { PUBLICATIONS } from '../../data/publications';
 import PublicationCard from '../common/PublicationCard';
 
-type PreviewTab = 'Recientes' | Exclude<PublicationType, 'Investigaciones'>;
-
-const TABS: PreviewTab[] = ['Recientes', 'Artículos', 'Libros', 'Cartillas Rurales'];
+const TABS = ['Recientes', 'Artículos', 'Libros', 'Cartillas Rurales'];
 
 /** Vista previa del repositorio: 3 tarjetas filtradas por pestaña. */
 export default function RepositoryPreview() {
-  const [tab, setTab] = useState<PreviewTab>('Recientes');
+  const [tab, setTab] = useState('Recientes');
 
   const items = useMemo(() => {
     // El JSON está ordenado del más reciente al más antiguo.

@@ -14,7 +14,7 @@ const BODY_CLASS = 'has-video-bg';
  * - Pausa el video cuando la pestaña no está visible (ahorro de recursos).
  */
 export default function VideoBackground() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const video = videoRef.current;

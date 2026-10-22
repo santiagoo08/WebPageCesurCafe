@@ -1,14 +1,7 @@
-import type { Publication } from '../../data/publications';
 import { slugify, typeLabel } from '../../data/publications';
 import './PublicationCard.css';
 
-interface PublicationCardProps {
-  publication: Publication;
-  /** Muestra el estado (Finalizado / Activo) — usado en la vista Repositorio. */
-  showStatus?: boolean;
-}
-
-export default function PublicationCard({ publication, showStatus = false }: PublicationCardProps) {
+export default function PublicationCard({ publication, showStatus = false }) {
   const { title, summary, area, type, status, year, author } = publication;
 
   return (

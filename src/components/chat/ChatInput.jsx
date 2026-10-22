@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import { useChat } from '../../context/useChat';
 import Icon from '../common/Icon';
 
@@ -6,7 +6,7 @@ export default function ChatInput() {
   const { sendMessage, isLoading } = useChat();
   const [text, setText] = useState('');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!text.trim() || isLoading) return;
     sendMessage(text);

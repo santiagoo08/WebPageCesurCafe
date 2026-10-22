@@ -5,7 +5,7 @@ const SUGGESTIONS = [
   'Proyectos de café',
   'Ubicación USCO',
   'Publicaciones',
-] as const;
+];
 
 export default function QuickSuggestions() {
   const { sendMessage, isLoading } = useChat();

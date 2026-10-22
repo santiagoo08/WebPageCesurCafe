@@ -1,14 +1,6 @@
 // Proyectos destacados del carrusel Hero (Inicio).
 
-export interface FeaturedProject {
-  id: string;
-  title: string;
-  description: string;
-  /** Ruta opcional a un video de fondo (p. ej. `/videos/monitoreo.mp4`). */
-  video?: string;
-}
-
-export const FEATURED_PROJECTS: FeaturedProject[] = [
+export const FEATURED_PROJECTS = [
   {
     id: 'monitoreo-agricola',
     title: 'Sistema de monitoreo agrícola',

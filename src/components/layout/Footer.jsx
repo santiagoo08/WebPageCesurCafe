@@ -1,16 +1,15 @@
-import type { SocialLink } from '../../data/navigation';
 import { NAV_ITEMS, SOCIAL_LINKS } from '../../data/navigation';
 import { Link } from 'react-router';
 import Logo from './Logo';
 import './Footer.css';
 
-function SocialIcon({ name }: { name: SocialLink['label'] }) {
+function SocialIcon({ name }) {
   const common = {
     width: 20,
     height: 20,
     viewBox: '0 0 24 24',
     'aria-hidden': true,
-  } as const;
+  };
 
   switch (name) {
     case 'Instagram':

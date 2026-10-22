@@ -15,7 +15,7 @@ const STACK_STEP = 24;
  * En pantallas pequeñas o con "reducir movimiento" se muestran en flujo normal.
  */
 export default function StackedServices() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -24,7 +24,7 @@ export default function StackedServices() {
     const mm = gsap.matchMedia();
 
     mm.add('(min-width: 64em) and (prefers-reduced-motion: no-preference)', () => {
-      const cards = gsap.utils.toArray<HTMLElement>('.stack-card', container);
+      const cards = gsap.utils.toArray('.stack-card', container);
       const last = cards[cards.length - 1];
       const navOffset = () =>
         (document.querySelector('.site-navbar')?.getBoundingClientRect().height ?? 76) + 24;

@@ -12,8 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
  * desvanece con el scroll (GSAP ScrollTrigger, scrub) dejando ver el video detrás.
  */
 export default function VideoHero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;

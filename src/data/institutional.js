@@ -1,13 +1,6 @@
 // Contenido institucional: propósito, servicios, equipo, testimonios y contacto.
 
-export interface PurposeCard {
-  eyebrow: string;
-  title: string;
-  text: string;
-  icon: 'target' | 'compass' | 'award';
-}
-
-export const PURPOSE_CARDS: PurposeCard[] = [
+export const PURPOSE_CARDS = [
   {
     eyebrow: 'Nuestro propósito',
     title: 'Misión',
@@ -31,23 +24,7 @@ export const PURPOSE_CARDS: PurposeCard[] = [
 // ---------------------------------------------------------------------------
 // Servicios (usados en el Maestro-Detalle de Inicio y en la vista Servicios)
 // ---------------------------------------------------------------------------
-export interface Service {
-  id: string;
-  /** Nombre corto para el menú de Inicio. */
-  shortName: string;
-  /** Etiqueta superior en la tarjeta apilable. */
-  tag: string;
-  /** Título completo en la vista Servicios. */
-  title: string;
-  description: string;
-  highlights: string[];
-  icon: 'lab' | 'fermentation' | 'training';
-  tone: string;
-  image?: string;
-  video?: string;
-}
-
-export const SERVICES: Service[] = [
+export const SERVICES = [
   {
     id: 'laboratorio-calidad',
     shortName: 'Laboratorio de calidad',
@@ -98,45 +75,21 @@ export const SERVICES: Service[] = [
 // ---------------------------------------------------------------------------
 // Nosotros
 // ---------------------------------------------------------------------------
-export interface AccordionPanel {
-  title: string;
-  caption: string;
-  tone: string;
-  image?: string;
-  video?: string;
-}
-
-export const WHO_WE_ARE_PANELS: AccordionPanel[] = [
+export const WHO_WE_ARE_PANELS = [
   { title: 'Investigación', caption: 'Ciencia aplicada a la cadena del café', tone: 'tone-microbiologia' },
   { title: 'Laboratorio', caption: 'Calidad física y sensorial', tone: 'tone-sensorial' },
   { title: 'Territorio', caption: 'Fincas y montañas del Huila', tone: 'tone-fitosanidad' },
   { title: 'Comunidad', caption: 'Caficultores y jóvenes rurales', tone: 'tone-educacion-rural' },
 ];
 
-export interface TimelineMilestone {
-  id: number;
-  /** Textos vacíos intencionalmente (AGENTS.md §5 – Sección 2). */
-  year: string;
-  title: string;
-  text: string;
-}
-
-export const TIMELINE_MILESTONES: TimelineMilestone[] = [
+export const TIMELINE_MILESTONES = [
   { id: 1, year: '', title: '', text: '' },
   { id: 2, year: '', title: '', text: '' },
   { id: 3, year: '', title: '', text: '' },
   { id: 4, year: '', title: '', text: '' },
 ];
 
-export interface Researcher {
-  id: string;
-  name: string;
-  role: string;
-  initials: string;
-  photo?: string;
-}
-
-export const RESEARCHERS: Researcher[] = [
+export const RESEARCHERS = [
   { id: 'laura-sofia', name: 'Dra. Laura Sofía', role: 'Líder de Sostenibilidad', initials: 'LS' },
   { id: 'juan-david', name: 'MSc. Juan David', role: 'Investigador de Poscosecha', initials: 'JD' },
   { id: 'valentina-ruiz', name: 'Biól. Valentina Ruiz', role: 'Analista de Microbiología', initials: 'VR' },
@@ -145,15 +98,7 @@ export const RESEARCHERS: Researcher[] = [
 // ---------------------------------------------------------------------------
 // Servicios – Testimonios
 // ---------------------------------------------------------------------------
-export interface Testimonial {
-  id: string;
-  category: string;
-  quote: string;
-  author: string;
-  role: string;
-}
-
-export const TESTIMONIALS: Testimonial[] = [
+export const TESTIMONIALS = [
   {
     id: 't1',
     category: 'Perfil de taza',
@@ -195,7 +140,7 @@ export const CONTACT_INFO = {
   email: 'cesurcafe@usco.edu.co',
   location: 'Neiva, Huila',
   institution: 'Universidad Surcolombiana',
-} as const;
+};
 
 export const RESEARCH_LINES = [
   'Calidad física y sensorial del café',

@@ -5,7 +5,7 @@ import Icon from '../common/Icon';
 
 /** Carrusel horizontal "Voces de la comunidad cafetera". */
 export default function Testimonials() {
-  const trackRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef(null);
   const [edges, setEdges] = useState({ start: true, end: false });
 
   const updateEdges = () => {
@@ -26,10 +26,10 @@ export default function Testimonials() {
     return () => ro.disconnect();
   }, []);
 
-  const scroll = (dir: 1 | -1) => {
+  const scroll = (dir) => {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>('.testimonial');
+    const card = el.querySelector('.testimonial');
     const amount = card ? card.offsetWidth + 24 : el.clientWidth * 0.8;
     el.scrollBy({ left: dir * amount, behavior: 'smooth' });
   };

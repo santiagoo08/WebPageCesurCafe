@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from 'react';
+import { useState } from 'react';
 import { askGemini } from '../services/gemini';
-import { ChatContext, type ChatMessage } from './chatContextDef';
+import { ChatContext } from './chatContextDef';
 
-function formatTime(date: Date = new Date()): string {
+function formatTime(date = new Date()) {
   return date.toLocaleTimeString('es-CO', {
     hour: '2-digit',
     minute: '2-digit',
@@ -10,7 +10,7 @@ function formatTime(date: Date = new Date()): string {
   });
 }
 
-const INITIAL_MESSAGES: ChatMessage[] = [
+const INITIAL_MESSAGES = [
   {
     id: 'welcome-1',
     sender: 'bot',
@@ -19,16 +19,16 @@ const INITIAL_MESSAGES: ChatMessage[] = [
   },
 ];
 
-export function ChatProvider({ children }: { children: ReactNode }) {
-  const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
+export function ChatProvider({ children }) {
+  const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [isLoading, setIsLoading] = useState(false);
   const [isWidgetOpen, setIsWidgetOpen] = useState(false);
 
-  const sendMessage = async (text: string) => {
+  const sendMessage = async (text) => {
     const trimmed = text.trim();
     if (!trimmed || isLoading) return;
 
-    const userMsg: ChatMessage = {
+    const userMsg = {
       id: `user-${Date.now()}`,
       sender: 'user',
       text: trimmed,
@@ -40,13 +40,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
     try {
       const history = messages.map((m) => ({
-        role: m.sender === 'user' ? ('user' as const) : ('model' as const),
+        role: m.sender === 'user' ? 'user' : 'model',
         text: m.text,
       }));
 
       const reply = await askGemini(trimmed, history);
 
-      const botMsg: ChatMessage = {
+      const botMsg = {
         id: `bot-${Date.now()}`,
         sender: 'bot',
         text: reply,
@@ -56,7 +56,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       setMessages((prev) => [...prev, botMsg]);
     } catch (err) {
       console.error('Error enviando mensaje a CaféBot:', err);
-      const errorMsg: ChatMessage = {
+      const errorMsg = {
         id: `bot-err-${Date.now()}`,
         sender: 'bot',
         text: 'Ocurrió un problema temporal al procesar tu solicitud. Por favor intenta de nuevo.',

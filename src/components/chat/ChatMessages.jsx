@@ -4,7 +4,7 @@ import CafeBotAvatar from './CafeBotAvatar';
 
 export default function ChatMessages() {
   const { messages, isLoading } = useChat();
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });

@@ -10,7 +10,7 @@ export default function HeroCarousel() {
   const total = FEATURED_PROJECTS.length;
   const project = FEATURED_PROJECTS[index];
 
-  const go = (next: number) => setIndex((next + total) % total);
+  const go = (next) => setIndex((next + total) % total);
 
   // Avance automático (se reinicia al cambiar de diapositiva).
   useEffect(() => {

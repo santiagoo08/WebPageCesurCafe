@@ -5,7 +5,7 @@ import { RESEARCHERS } from '../../data/institutional';
 export default function ResearchersCarousel() {
   const [active, setActive] = useState(0);
   const total = RESEARCHERS.length;
-  const at = (offset: number) => (active + offset + total) % total;
+  const at = (offset) => (active + offset + total) % total;
 
   // Orden visual: anterior · activa · siguiente
   const visible = [at(-1), at(0), at(1)];

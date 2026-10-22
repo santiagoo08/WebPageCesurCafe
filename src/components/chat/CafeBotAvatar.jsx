@@ -1,14 +1,8 @@
-interface CafeBotAvatarProps {
-  size?: number;
-  showStatusDot?: boolean;
-  className?: string;
-}
-
 export default function CafeBotAvatar({
   size = 40,
   showStatusDot = true,
   className = '',
-}: CafeBotAvatarProps) {
+}) {
   return (
     <div
       className={`cafebot-avatar ${className}`.trim()}

@@ -1,18 +1,15 @@
 import { useMemo, useState } from 'react';
-import type { PublicationType } from '../../data/publications';
 import { PUBLICATIONS, normalizeText } from '../../data/publications';
 import PublicationCard from '../common/PublicationCard';
 import Icon from '../common/Icon';
 
-type FilterTab = 'Todos' | PublicationType;
-
-const TABS: FilterTab[] = ['Todos', 'Artículos', 'Libros', 'Cartillas Rurales', 'Investigaciones'];
+const TABS = ['Todos', 'Artículos', 'Libros', 'Cartillas Rurales', 'Investigaciones'];
 const PAGE_SIZE = 6;
 
 /** Explorador filtrable del repositorio (datos estáticos en JSON). */
 export default function RepositoryExplorer() {
   const [query, setQuery] = useState('');
-  const [tab, setTab] = useState<FilterTab>('Todos');
+  const [tab, setTab] = useState('Todos');
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   const results = useMemo(() => {
@@ -29,11 +26,11 @@ export default function RepositoryExplorer() {
   const hasMore = visible < results.length;
 
   // Al cambiar el filtro o la búsqueda, se reinicia la paginación.
-  const changeTab = (t: FilterTab) => {
+  const changeTab = (t) => {
     setTab(t);
     setVisible(PAGE_SIZE);
   };
-  const changeQuery = (value: string) => {
+  const changeQuery = (value) => {
     setQuery(value);
     setVisible(PAGE_SIZE);
   };
