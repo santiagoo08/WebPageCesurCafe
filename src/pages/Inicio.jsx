@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   FEATURED_PROJECTS,
   PUBLICATIONS,
-  PURPOSE_CARDS,
   SERVICES,
 } from '../data/institutional';
 import PublicationCard from '../components/PublicationCard';
@@ -285,26 +284,6 @@ export default function Inicio() {
     <div className="inicio-page">
       <VideoHero />
       <HeroCarousel />
-
-      {/* Propósito institucional (Misión, Visión y Logros) */}
-      <section className="purpose on-dark section-padding">
-        <div className="grid-container">
-          <div className="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-3">
-            {PURPOSE_CARDS.map((card) => (
-              <div className="cell" key={card.title}>
-                <article className="purpose__card">
-                  <span className="purpose__icon">
-                    <Icon name={card.icon} size={26} />
-                  </span>
-                  <span className="eyebrow">{card.eyebrow}</span>
-                  <h2 className="purpose__title">{card.title}</h2>
-                  <p className="purpose__text">"{card.text}"</p>
-                </article>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Banner "Conoce más sobre nosotros" */}
       <section className="about-banner section-padding">

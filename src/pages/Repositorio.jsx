@@ -124,16 +124,15 @@ export default function Repositorio() {
 
   return (
     <>
-      <section className="page-hero">
-        <div className="grid-container">
-          <div className="page-hero__box">
-            <span className="eyebrow">Producción científica</span>
-            <h1>Repositorio</h1>
-            <p>
-              Investigaciones, artículos, libros y cartillas rurales producidos por el centro, en un
-              solo lugar.
-            </p>
-          </div>
+      <section className="page-hero page-hero--repositorio">
+        <div className="page-hero__media" aria-hidden="true" />
+        <div className="grid-container page-hero__content">
+          <span className="eyebrow">Producción científica</span>
+          <h1>Repositorio</h1>
+          <p>
+            Investigaciones, artículos, libros y cartillas rurales producidos por el centro, en un
+            solo lugar.
+          </p>
         </div>
       </section>
 

@@ -23,12 +23,12 @@ const VARIANTS = {
   },
   left: {
     from: { autoAlpha: 0, x: -48 },
-    to: { autoAlpha: 1, x: 0 },
+    to: { autoAlpha: 1, x: 0, duration: 1.35 },
     clear: 'opacity,visibility,transform',
   },
   right: {
     from: { autoAlpha: 0, x: 48 },
-    to: { autoAlpha: 1, x: 0 },
+    to: { autoAlpha: 1, x: 0, duration: 1.35 },
     clear: 'opacity,visibility,transform',
   },
   clip: {

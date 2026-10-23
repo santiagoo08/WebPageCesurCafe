@@ -49,7 +49,7 @@ function StackedServices() {
               start: 'top bottom',
               endTrigger: last,
               end: endPosition,
-              scrub: 0.6,
+              scrub: 1.6,
               invalidateOnRefresh: true,
             },
           });
@@ -60,27 +60,27 @@ function StackedServices() {
     mm.add(MOTION_OK, () => {
       gsap.utils.toArray('.stack-card', container).forEach((card) => {
         const tl = gsap.timeline({
-          defaults: { ease: REVEAL_EASE, duration: 0.8 },
-          scrollTrigger: { trigger: card, start: 'top 78%', once: true },
+          defaults: { ease: REVEAL_EASE, duration: 1.35 },
+          scrollTrigger: { trigger: card, start: 'top 82%', once: true },
         });
 
         tl.from(card.querySelector('.stack-card__media'), {
           clipPath: 'inset(100% 0% 0% 0%)',
-          duration: 1.1,
-          ease: 'power4.out',
+          duration: 1.75,
+          ease: 'power3.out',
           clearProps: 'clipPath',
         })
           .from(
             card.querySelectorAll(
               '.stack-card__top, .stack-card__title, .stack-card__desc, .stack-card__list li',
             ),
-            { autoAlpha: 0, y: 24, stagger: 0.07, clearProps: 'opacity,visibility,transform' },
-            0.1,
+            { autoAlpha: 0, y: 28, stagger: 0.14, clearProps: 'opacity,visibility,transform' },
+            0.25,
           )
           .from(
             card.querySelector('.cc-btn'),
-            { autoAlpha: 0, clearProps: 'opacity,visibility' },
-            '-=0.4',
+            { autoAlpha: 0, duration: 1.1, clearProps: 'opacity,visibility' },
+            '-=0.5',
           );
       });
     });
@@ -226,13 +226,12 @@ function Testimonials() {
 export default function Servicios() {
   return (
     <>
-      <section className="page-hero">
-        <div className="grid-container">
-          <div className="page-hero__box">
-            <span className="eyebrow">Lo que hacemos</span>
-            <h1>Servicios</h1>
-            <p>Capacidades de investigación aplicada para el territorio y sus comunidades.</p>
-          </div>
+      <section className="page-hero page-hero--servicios">
+        <div className="page-hero__media" aria-hidden="true" />
+        <div className="grid-container page-hero__content">
+          <span className="eyebrow">Lo que hacemos</span>
+          <h1>Servicios</h1>
+          <p>Capacidades de investigación aplicada para el territorio y sus comunidades.</p>
         </div>
       </section>
       <StackedServices />

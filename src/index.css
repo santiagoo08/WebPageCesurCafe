@@ -3,29 +3,31 @@
    Se carga DESPUÉS de Foundation para sobrescribir sus valores por defecto.
    ========================================================================== */
 :root {
-  /* Fondos Principales */
-  --bg-primary: #F6F4F0;       /* Fondo Pergamino - Canvas general de la página */
-  --bg-card: #FFFFFF;          /* Blanco Puro - Tarjetas claras y contenedores */
+  /* Fondos Principales — Paleta "Tostión Nocturna" */
+  --bg-primary: #181310;       /* Grano Tostado Oscuro - Canvas general de la página */
+  --bg-card: #261E1A;          /* Tostión Media-Oscura - Tarjetas y contenedores */
+  --bg-chat: #1F1916;          /* Fondo de conversación de CaféBot */
+  --bg-pill-light: rgba(243, 237, 226, 0.9); /* Etiquetas claras cálidas */
 
   /* Fondos Oscuros (Alto Contraste) */
-  --bg-dark: #1C1613;          /* Espresso Profundo - Contenedores oscuros (Misión, Servicios, Experiencias) */
-  --bg-dark-card: #2A221E;     /* Tostión Oscura - Tarjetas internas sobre fondo oscuro */
+  --bg-dark: #1C1613;          /* Espresso Profundo - Contenedores oscuros */
+  --bg-dark-card: #2A221E;     /* Tostión Oscura - Tarjetas internas */
 
   /* Colores de Acento */
   --accent-primary: #B8332A;   /* Rojo Cereza - Botones principales, widget CaféBot, estados activos e hitos */
   --accent-secondary: #C88A4B; /* Caramelo - Etiquetas (tags), bordes activos, línea del tiempo y detalles */
 
   /* Tipografía */
-  --text-primary: #1C1613;     /* Espresso Profundo - Títulos y texto principal sobre fondos claros */
-  --text-secondary: #6E655F;   /* Ceniza de Café - Subtítulos, descripciones y metadatos */
-  --text-on-dark: #F6F4F0;     /* Texto claro sobre bloques oscuros */
+  --text-primary: #F3EDE2;     /* Crema Pergamino - Títulos y texto principal */
+  --text-secondary: #B8ABA0;   /* Ceniza Cálida - Subtítulos, descripciones y metadatos */
+  --text-on-dark: #F3EDE2;     /* Crema Pergamino - Texto claro sobre bloques oscuros */
 
   /* ---- Tokens de soporte ---- */
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  --border-subtle: rgba(28, 22, 19, 0.1);
-  --border-on-dark: rgba(246, 244, 240, 0.12);
+  --border-subtle: rgba(243, 237, 226, 0.14);
+  --border-on-dark: rgba(243, 237, 226, 0.14);
 
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -148,28 +150,75 @@ a:focus {
   color: rgba(246, 244, 240, 0.72);
 }
 
-/* Bloque blanco centrado (cabeceras de Servicios / Repositorio) */
+/* Bloque de cabecera de vista a ancho completo pegado a los bordes
+   (Nosotros / Servicios / Repositorio) con imagen estática de fondo */
 .page-hero {
-  padding-top: 3rem;
-}
-
-.page-hero__box {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(380px, 54vh, 520px);
+  padding: clamp(4.5rem, 8vw, 6.5rem) 0;
+  margin: 0;
+  overflow: hidden;
+  isolation: isolate;
   text-align: center;
-  border: 1px solid var(--border-subtle);
+  background: var(--bg-dark);
+  border-bottom: 1px solid rgba(200, 138, 75, 0.22);
 }
 
-.page-hero__box h1 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+/* Capa de imagen estática que ocupa todo el bloque de borde a borde */
+.page-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(24, 19, 16, 0.62) 0%,
+      rgba(24, 19, 16, 0.52) 50%,
+      rgba(24, 19, 16, 0.92) 100%
+    ),
+    radial-gradient(circle at 50% 50%, rgba(24, 19, 16, 0.25), rgba(24, 19, 16, 0.72) 100%),
+    var(--hero-bg-image, none);
+  background-size: cover;
+  background-position: center 28%;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+}
+
+.page-hero--nosotros {
+  --hero-bg-image: url('/images/nosotros.jpg');
+}
+
+.page-hero--servicios {
+  --hero-bg-image: url('/images/servicios.jpg');
+}
+
+.page-hero--repositorio {
+  --hero-bg-image: url('/images/repositorio.jpg');
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.page-hero h1 {
+  font-size: clamp(2.8rem, 6.5vw, 4.6rem);
   margin: 0.6rem 0 1rem;
+  color: var(--text-on-dark);
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.55);
 }
 
-.page-hero__box p {
-  max-width: 40rem;
+.page-hero p {
+  max-width: 44rem;
   margin: 0 auto;
-  font-size: 1.1rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  color: rgba(243, 237, 226, 0.88);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 
 /* ---- Botones ---- */
@@ -264,8 +313,8 @@ a:focus {
 }
 
 .pill--light {
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--text-primary);
+  background: var(--bg-pill-light);
+  color: #1C1613;
 }
 
 .pill--caramel {
@@ -658,19 +707,19 @@ a:focus {
   box-shadow: none;
 }
 
-/* Logo en Blanco Puro */
+/* Logo en Crema Pergamino (sin blanco puro) */
 .has-video-bg .site-navbar .logo__name {
-  color: #FFFFFF;
+  color: var(--text-on-dark);
 }
 
 .has-video-bg .site-navbar .logo__subtitle {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(243, 237, 226, 0.78);
 }
 
-/* 5 enlaces en Blanco Puro */
+/* 5 enlaces en Crema Pergamino */
 .has-video-bg .site-navbar__menu .site-navbar__link,
 .has-video-bg .site-navbar__menu .site-navbar__link.is-active {
-  color: #FFFFFF;
+  color: var(--text-on-dark);
 }
 
 /* Hover: acento Caramelo */
@@ -689,18 +738,18 @@ a:focus {
   background: var(--accent-primary);
 }
 
-/* Botón hamburguesa en blanco */
+/* Botón hamburguesa en tono crema */
 .has-video-bg .site-navbar__toggle span {
-  background: #FFFFFF;
+  background: var(--text-on-dark);
 }
 
 .has-video-bg .site-navbar__toggle:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(243, 237, 226, 0.12);
 }
 
 @media screen and (max-width: 63.99875em) {
   .has-video-bg .site-navbar__menu .site-navbar__link {
-    border-top-color: rgba(255, 255, 255, 0.14);
+    border-top-color: rgba(243, 237, 226, 0.14);
   }
 }
 
@@ -875,7 +924,7 @@ a:focus {
 }
 
 .pub-card__status--finalizado {
-  background: rgba(28, 22, 19, 0.07);
+  background: rgba(243, 237, 226, 0.08);
   color: var(--text-secondary);
 }
 
@@ -999,7 +1048,7 @@ a:focus {
   height: 18px;
   border-radius: 50%;
   background: var(--accent-primary);
-  color: #fff;
+  color: var(--text-on-dark);
   font-size: 0.65rem;
   font-weight: 700;
   border: 1.5px solid var(--bg-dark);
@@ -1076,15 +1125,15 @@ a:focus {
 }
 
 .cafebot-widget-close:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-on-dark);
+  background: rgba(243, 237, 226, 0.12);
 }
 
 .cafebot-widget-body {
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
-  background: #FCFBF9;
+  background: var(--bg-chat);
 }
 
 .cafebot-widget-footer {
@@ -1110,7 +1159,7 @@ a:focus {
 .chat-date-separator span {
   padding: 0.25rem 0.85rem;
   border-radius: var(--radius-pill);
-  background: rgba(28, 22, 19, 0.06);
+  background: rgba(243, 237, 226, 0.08);
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-secondary);
@@ -1153,7 +1202,7 @@ a:focus {
   background: var(--bg-primary);
   color: var(--text-primary);
   border-bottom-left-radius: 4px;
-  border: 1px solid rgba(28, 22, 19, 0.07);
+  border: 1px solid var(--border-subtle);
 }
 
 .chat-bubble--user {
@@ -1215,23 +1264,25 @@ a:focus {
   box-shadow: 0 0 0 3px rgba(184, 51, 42, 0.15);
 }
 
-.chat-input-form__field {
+.chat-input-form input.chat-input-form__field,
+.chat-input-form input.chat-input-form__field:focus {
   flex: 1;
-  background: transparent;
-  border: 0;
+  height: auto;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
   margin: 0;
-  padding: 0.4rem 0;
+  padding: 0.45rem 0;
   font-family: var(--font-body);
   font-size: 0.92rem;
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
   outline: none;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
-.chat-input-form__field:focus {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
+.chat-input-form input.chat-input-form__field::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.75;
 }
 
 .chat-input-form__btn {

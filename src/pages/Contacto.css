@@ -189,7 +189,7 @@ a.contact-info-item__val:hover {
   flex: 1;
   overflow-y: auto;
   padding: 1.5rem 1.75rem;
-  background: #FCFBF9;
+  background: var(--bg-chat);
 }
 
 .contacto-chat-card__footer {

@@ -1,21 +1,25 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { RESEARCHERS, TIMELINE_MILESTONES, WHO_WE_ARE_PANELS } from '../data/institutional';
+import {
+  PURPOSE_CARDS,
+  RESEARCHERS,
+  TIMELINE_MILESTONES,
+  WHO_WE_ARE_PANELS,
+} from '../data/institutional';
+import Icon from '../components/Icon';
 import MediaVisual from '../components/MediaVisual';
 import useScrollReveal, { MOTION_OK } from '../hooks/useScrollReveal';
 import './Nosotros.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STAGES = [
-  'Cereza de café',
-  'Despulpado & pergamino',
-  'Tostión artesanal',
-  'Taza de café servida',
-];
+const SPRITE_SRC = '/images/timeline-sprite.webp';
+const FRAME_COUNT = 240;
+const SPRITE_COLS = 15;
+const TILE_SIZE = 220;
 
-/** Cabecera "¿Quiénes somos?" + galería acordeón de 4 franjas. */
+/** Cabecera separada "¿Quiénes somos?" + bloque de Propósito + galería acordeón. */
 function WhoWeAre() {
   const [active, setActive] = useState(0);
   const sectionRef = useRef(null);
@@ -23,22 +27,60 @@ function WhoWeAre() {
   useScrollReveal(sectionRef);
 
   return (
-    <section className="who section-padding" ref={sectionRef}>
-      <div className="grid-container">
-        <div className="grid-x grid-margin-x align-bottom who__head">
-          <div className="cell large-6">
-            <span className="eyebrow">Centro de investigación</span>
-            <h1 className="who__title">¿Quiénes somos?</h1>
-          </div>
-          <div className="cell large-6">
-            <p className="who__desc">
-              “Somos el Centro Surcolombiano de Investigación en Café (CESURCAFÉ) de la Universidad
-              Surcolombiana, orientados al desarrollo tecnológico y agroindustrial de la región.”
-            </p>
-          </div>
+    <>
+      <section className="page-hero page-hero--nosotros">
+        <div className="page-hero__media" aria-hidden="true" />
+        <div className="grid-container page-hero__content">
+          <span className="eyebrow">Centro de investigación</span>
+          <h1>¿Quiénes somos?</h1>
+          <p>
+            “Somos el Centro Surcolombiano de Investigación en Café (CESURCAFÉ) de la Universidad
+            Surcolombiana, orientados al desarrollo tecnológico y agroindustrial de la región.”
+          </p>
         </div>
+      </section>
 
-        <div className="who__accordion" role="list">
+      <section className="who section-padding" ref={sectionRef}>
+        <div className="grid-container">
+          {/* Misión, Visión y Reconocimientos (más altos y grandes, encima de las cards de ¿Quiénes somos?) */}
+          <div
+            className="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-3 who__purpose"
+            data-reveal="stagger"
+          >
+            {PURPOSE_CARDS.map((card, idx) => (
+              <div className="cell" key={card.title}>
+                <article className="purpose__card">
+                  <div className="purpose__top">
+                    <span className="purpose__icon">
+                      <Icon name={card.icon} size={30} />
+                    </span>
+                    <span className="purpose__num" aria-hidden="true">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <div className="purpose__body">
+                    <span className="eyebrow">{card.eyebrow}</span>
+                    <h2 className="purpose__title">{card.title}</h2>
+                    <p className="purpose__text">“{card.text}”</p>
+                    {card.detail && <p className="purpose__detail">{card.detail}</p>}
+                  </div>
+
+                  {card.pillars && (
+                    <footer className="purpose__footer">
+                      {card.pillars.map((pillar) => (
+                        <span key={pillar} className="pill pill--outline">
+                          {pillar}
+                        </span>
+                      ))}
+                    </footer>
+                  )}
+                </article>
+              </div>
+            ))}
+          </div>
+
+          <div className="who__accordion" role="list">
           {WHO_WE_ARE_PANELS.map((panel, i) => {
             const isActive = i === active;
             return (
@@ -67,70 +109,135 @@ function WhoWeAre() {
               </button>
             );
           })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
-/** Transformador SVG en el eje central (Cereza -> Pergamino -> Tostión -> Taza). */
+/**
+ * Animación hiperrealista tipo Apple a 60–120+ FPS reales:
+ * Secuencia de 240 fotogramas WebP precargados en RAM y renderizados en <canvas>
+ * con interpolación sub-fotograma (cross-blending entre frame A y frame B).
+ */
 function CoffeeMorph() {
   const containerRef = useRef(null);
-  const stageRef = useRef(null);
+  const canvasRef = useRef(null);
+  const ringRef = useRef(null);
 
   useLayoutEffect(() => {
     const el = containerRef.current;
+    const canvas = canvasRef.current;
+    const ring = ringRef.current;
     const timelineContainer = el?.closest('.timeline');
-    if (!el || !timelineContainer) return;
+    if (!el || !canvas || !timelineContainer) return;
 
-    let currentStage = 0;
-    const setStage = (idx) => {
-      if (idx === currentStage || !stageRef.current) return;
-      currentStage = idx;
-      stageRef.current.textContent = STAGES[idx];
-      gsap.fromTo(
-        stageRef.current,
-        { autoAlpha: 0, y: 6 },
-        { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out', overwrite: true },
+    const ctx2d = canvas.getContext('2d', { alpha: false });
+    if (!ctx2d) return;
+
+    const size = TILE_SIZE;
+    canvas.width = size;
+    canvas.height = size;
+
+    const sprite = new Image();
+    sprite.decoding = 'async';
+    let isLoaded = false;
+    let isDisposed = false;
+    let targetProgress = 0;
+    let renderedProgress = 0;
+
+    const drawTile = (frameIdx) => {
+      const col = frameIdx % SPRITE_COLS;
+      const row = Math.floor(frameIdx / SPRITE_COLS);
+      ctx2d.drawImage(
+        sprite,
+        col * TILE_SIZE,
+        row * TILE_SIZE,
+        TILE_SIZE,
+        TILE_SIZE,
+        0,
+        0,
+        size,
+        size,
       );
     };
 
-    const ctx = gsap.context(() => {
-      const badge = el.querySelector('.coffee-morph__badge');
+    const drawProgress = (progress) => {
+      if (isDisposed) return;
 
-      const tl = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: {
-          trigger: timelineContainer,
-          start: 'top 50%',
-          end: 'bottom 50%',
-          scrub: 0.6,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => setStage(Math.min(Math.floor(self.progress * STAGES.length), 3)),
+      ctx2d.fillStyle = '#19140E';
+      ctx2d.fillRect(0, 0, size, size);
+
+      if (isLoaded) {
+        const exact = progress * (FRAME_COUNT - 4);
+        const idxA = Math.max(0, Math.min(FRAME_COUNT - 1, Math.floor(exact)));
+        const idxB = Math.max(0, Math.min(FRAME_COUNT - 1, idxA + 1));
+        const blend = exact - idxA;
+
+        ctx2d.globalAlpha = 1;
+        drawTile(idxA);
+
+        if (idxB !== idxA && blend > 0.01) {
+          ctx2d.globalAlpha = blend;
+          drawTile(idxB);
+          ctx2d.globalAlpha = 1;
+        }
+      }
+
+      if (ring) {
+        ring.style.strokeDashoffset = String(100 - progress * 100);
+      }
+    };
+
+    sprite.src = SPRITE_SRC;
+    sprite.onload = () => {
+      if (isDisposed) return;
+      isLoaded = true;
+      drawProgress(renderedProgress);
+    };
+
+    const badge = el.querySelector('.coffee-morph__badge');
+    const axisProgress = timelineContainer.querySelector('.timeline__axis-progress');
+    const setY = gsap.quickSetter(el, 'y', 'px');
+
+    // Ticker cinemático: amortigua y limita la velocidad máxima de transición
+    // para que todas las etapas del video se aprecien lentamente a 60–120+ FPS
+    const onTick = () => {
+      if (isDisposed) return;
+      const diff = targetProgress - renderedProgress;
+      if (Math.abs(diff) > 0.0001) {
+        const dt = Math.min(gsap.ticker.deltaRatio(), 2.5);
+        // Velocidad máxima controlada (~6 a 7 segundos para recorrer los 240 cuadros)
+        const maxStep = 0.0024 * dt;
+        const dampedStep = diff * 0.032 * dt;
+        const step =
+          Math.abs(dampedStep) > maxStep ? Math.sign(diff) * maxStep : dampedStep;
+
+        renderedProgress = Math.max(0, Math.min(1, renderedProgress + step));
+        drawProgress(renderedProgress);
+
+        const maxTravel = Math.max(0, timelineContainer.clientHeight - (badge?.offsetHeight || 160));
+        setY(renderedProgress * maxTravel);
+        if (axisProgress) {
+          axisProgress.style.height = `${renderedProgress * 100}%`;
+        }
+      }
+    };
+
+    gsap.ticker.add(onTick);
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: timelineContainer,
+        start: 'top 68%',
+        end: 'bottom 32%',
+        scrub: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          targetProgress = self.progress;
         },
       });
-
-      tl.to('.timeline__axis-progress', { height: '100%', duration: 1 }, 0).to(
-        el,
-        { y: () => timelineContainer.clientHeight - badge.offsetHeight, duration: 1 },
-        0,
-      );
-
-      const swap = (from, to, at) => {
-        tl.to(
-          from,
-          { opacity: 0, scale: 0.6, rotate: -12, transformOrigin: '50% 50%', duration: 0.08, ease: 'power2.in' },
-          at - 0.04,
-        ).fromTo(
-          to,
-          { opacity: 0, scale: 0.6, rotate: 12, transformOrigin: '50% 50%' },
-          { opacity: 1, scale: 1, rotate: 0, duration: 0.08, ease: 'power2.out' },
-          at,
-        );
-      };
-      swap('.morph-stage--cherry', '.morph-stage--parchment', 0.25);
-      swap('.morph-stage--parchment', '.morph-stage--roast', 0.5);
-      swap('.morph-stage--roast', '.morph-stage--cup', 0.75);
 
       gsap.utils.toArray('.timeline__node').forEach((node) => {
         ScrollTrigger.create({
@@ -143,71 +250,33 @@ function CoffeeMorph() {
       });
     }, timelineContainer);
 
-    return () => ctx.revert();
+    return () => {
+      isDisposed = true;
+      gsap.ticker.remove(onTick);
+      ctx.revert();
+    };
   }, []);
 
   return (
     <div className="coffee-morph" ref={containerRef} aria-hidden="true">
       <div className="coffee-morph__badge">
-        <svg viewBox="0 0 100 100" className="coffee-morph__svg">
-          {/* Fase 1: Cereza de Café */}
-          <g className="morph-stage morph-stage--cherry">
-            <path d="M50 20 Q46 8 36 6" stroke="#4A7C32" strokeWidth="4" fill="none" strokeLinecap="round" />
-            <path d="M36 6 Q42 2 48 4" stroke="#4A7C32" strokeWidth="2" fill="none" />
-            <circle cx="50" cy="56" r="28" fill="var(--accent-primary)" />
-            <ellipse cx="40" cy="46" rx="7" ry="4" transform="rotate(-30 40 46)" fill="#FFFFFF" opacity="0.35" />
-            <circle cx="50" cy="80" r="3" fill="#6E1F1A" />
-          </g>
-
-          {/* Fase 2: Despulpado / Pergamino */}
-          <g className="morph-stage morph-stage--parchment">
-            <ellipse cx="50" cy="52" rx="23" ry="30" fill="var(--accent-secondary)" />
-            <path
-              d="M50 25 C45 35 55 45 50 55 C45 65 55 72 50 79"
-              fill="none"
-              stroke="#8C5C28"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-            />
-            <ellipse cx="42" cy="44" rx="4" ry="12" fill="#FFFFFF" opacity="0.25" />
-          </g>
-
-          {/* Fase 3: Grano de Tostión Oscura */}
-          <g className="morph-stage morph-stage--roast">
-            <ellipse cx="50" cy="52" rx="24" ry="31" fill="#1C1613" stroke="#C88A4B" strokeWidth="1.5" />
-            <path
-              d="M50 24 C44 36 56 46 50 56 C44 66 56 72 50 80"
-              fill="none"
-              stroke="#C88A4B"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            <path d="M37 38 Q34 50 37 62" stroke="#FFFFFF" strokeWidth="1.5" fill="none" opacity="0.2" />
-          </g>
-
-          {/* Fase 4: Taza de Café Servida */}
-          <g className="morph-stage morph-stage--cup">
-            <ellipse cx="50" cy="78" rx="34" ry="8" fill="#D9D4CC" />
-            <ellipse cx="50" cy="76" rx="30" ry="6" fill="#FFFFFF" />
-            <path
-              d="M68 46 C80 46 80 62 67 66"
-              fill="none"
-              stroke="#E8E4DD"
-              strokeWidth="5"
-              strokeLinecap="round"
-            />
-            <path d="M26 42 L32 72 Q50 78 68 72 L74 42 Z" fill="#FFFFFF" />
-            <ellipse cx="50" cy="42" rx="24" ry="7" fill="#2A221E" />
-            <ellipse cx="50" cy="42" rx="20" ry="5" fill="#C88A4B" opacity="0.85" />
-            <path d="M42 32 Q39 24 43 16" fill="none" stroke="#C88A4B" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-            <path d="M50 30 Q54 22 50 14" fill="none" stroke="#C88A4B" strokeWidth="2.5" strokeLinecap="round" opacity="0.85" />
-            <path d="M58 32 Q55 24 59 16" fill="none" stroke="#C88A4B" strokeWidth="2" strokeLinecap="round" opacity="0.7" />
-          </g>
+        <canvas ref={canvasRef} className="coffee-morph__canvas" />
+        <svg className="coffee-morph__ring" viewBox="0 0 100 100">
+          <circle
+            className="coffee-morph__ring-track"
+            cx="50"
+            cy="50"
+            r="48"
+          />
+          <circle
+            ref={ringRef}
+            className="coffee-morph__ring-progress"
+            cx="50"
+            cy="50"
+            r="48"
+            pathLength="100"
+          />
         </svg>
-      </div>
-
-      <div className="coffee-morph__stage-pill">
-        <span ref={stageRef}>Cereza de café</span>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useRef, useState } from 'react';
 import { askGemini } from '../services/gemini';
 
 const ChatContext = createContext(undefined);
@@ -15,7 +15,7 @@ const INITIAL_MESSAGES = [
   {
     id: 'welcome-1',
     sender: 'bot',
-    text: '¡Hola! Soy CaféBot, el asistente virtual de CESURCAFÉ en la Universidad Surcolombiana. ¿En qué puedo orientarte hoy sobre nuestras investigaciones, proyectos o servicios?',
+    text: '¡Hola! Soy **CaféBot**, el asistente virtual de **CESURCAFÉ** en la Universidad Surcolombiana. ¿En qué puedo orientarte hoy sobre nuestras investigaciones, proyectos o servicios?',
     time: '09:30 a. m.',
   },
 ];
@@ -24,10 +24,16 @@ export function ChatProvider({ children }) {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [isLoading, setIsLoading] = useState(false);
   const [isWidgetOpen, setIsWidgetOpen] = useState(false);
+  const messagesRef = useRef(INITIAL_MESSAGES);
 
   const sendMessage = async (text) => {
-    const trimmed = text.trim();
+    const trimmed = String(text ?? '').trim();
     if (!trimmed || isLoading) return;
+
+    const historySnapshot = messagesRef.current.map((m) => ({
+      role: m.sender === 'user' ? 'user' : 'model',
+      text: m.text,
+    }));
 
     const userMsg = {
       id: `user-${Date.now()}`,
@@ -36,32 +42,39 @@ export function ChatProvider({ children }) {
       time: formatTime(),
     };
 
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => {
+      const next = [...prev, userMsg];
+      messagesRef.current = next;
+      return next;
+    });
     setIsLoading(true);
 
     try {
-      const history = messages.map((m) => ({
-        role: m.sender === 'user' ? 'user' : 'model',
-        text: m.text,
-      }));
+      const reply = await askGemini(trimmed, historySnapshot);
 
-      const reply = await askGemini(trimmed, history);
-
-      setMessages((prev) => [
-        ...prev,
-        { id: `bot-${Date.now()}`, sender: 'bot', text: reply, time: formatTime() },
-      ]);
+      setMessages((prev) => {
+        const next = [
+          ...prev,
+          { id: `bot-${Date.now()}`, sender: 'bot', text: reply, time: formatTime() },
+        ];
+        messagesRef.current = next;
+        return next;
+      });
     } catch (err) {
       console.error('Error enviando mensaje a CaféBot:', err);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `bot-err-${Date.now()}`,
-          sender: 'bot',
-          text: 'Ocurrió un problema temporal al procesar tu solicitud. Por favor intenta de nuevo.',
-          time: formatTime(),
-        },
-      ]);
+      setMessages((prev) => {
+        const next = [
+          ...prev,
+          {
+            id: `bot-err-${Date.now()}`,
+            sender: 'bot',
+            text: 'Ocurrió un problema temporal al procesar tu solicitud. Por favor intenta de nuevo.',
+            time: formatTime(),
+          },
+        ];
+        messagesRef.current = next;
+        return next;
+      });
     } finally {
       setIsLoading(false);
     }

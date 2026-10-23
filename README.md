@@ -1,18 +1,13 @@
-# ☕ Portal Web CESURCAFÉ + CaféBot
+#  Portal Web CESURCAFÉ + CaféBot
 
 Portal web interactivo del **Centro Surcolombiano de Investigación en Café (CESURCAFÉ)** de la **Universidad Surcolombiana (USCO)**, en Neiva, Huila, Colombia. Incluye **CaféBot**, un asistente virtual con IA basado en Google Gemini.
 
 > Proyecto desarrollado en el marco del **Semillero de Investigación CESURCAFÉ – USCO**.
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![Foundation](https://img.shields.io/badge/ZURB_Foundation-6.9-1779BA)
-![GSAP](https://img.shields.io/badge/GSAP-ScrollTrigger-88CE02?logo=greensock&logoColor=white)
-![Gemini](https://img.shields.io/badge/Google-Gemini-8E75B2?logo=googlegemini&logoColor=white)
 
 ---
 
-## 📑 Tabla de contenido
+##  Tabla de contenido
 
 1. [¿Qué es este proyecto?](#-qué-es-este-proyecto)
 2. [Funcionalidades principales](#-funcionalidades-principales)
@@ -30,7 +25,7 @@ Portal web interactivo del **Centro Surcolombiano de Investigación en Café (CE
 
 ---
 
-## 🌱 ¿Qué es este proyecto?
+##  ¿Qué es este proyecto?
 
 Es una **aplicación web de una sola página (SPA)** que sirve como vitrina digital de CESURCAFÉ. Su objetivo es:
 
@@ -43,18 +38,18 @@ El proyecto **no utiliza base de datos**: toda la información se carga desde ar
 
 ---
 
-## ✨ Funcionalidades principales
+##  Funcionalidades principales
 
 | Sección | Qué contiene |
 |---|---|
-| **Inicio** | Hero con video y carrusel de proyectos destacados, tarjetas de Misión / Visión / Logros, banner hacia *Nosotros*, vista previa del repositorio con pestañas y resumen de servicios tipo maestro‑detalle. |
-| **Nosotros** | Galería acordeón "¿Quiénes somos?", línea del tiempo animada con GSAP (una cereza de café que se transforma progresivamente en una taza servida) y carrusel de investigadores. |
-| **Servicios** | Tarjetas de servicios con efecto de apilamiento (*card stacking*) al hacer scroll y carrusel de testimonios "Voces de la comunidad cafetera". |
-| **Repositorio** | Catálogo de publicaciones con buscador en tiempo real (por título o autor, sin importar tildes), filtros por tipo y botón "Cargar más". |
+| **Inicio** | Hero con video y carrusel de proyectos destacados, banner hacia *Nosotros*, vista previa del repositorio con pestañas y resumen de servicios tipo maestro‑detalle. |
+| **Nosotros** | Portada a ancho completo, tarjetas de Misión / Visión / Reconocimientos, galería acordeón "¿Quiénes somos?", línea del tiempo animada a 60–120 fps con GSAP ScrollTrigger (cereza → pergamino → tostión → taza servida) y carrusel de investigadores. |
+| **Servicios** | Portada a ancho completo, tarjetas de servicios con efecto de apilamiento (*card stacking*) al hacer scroll y carrusel de testimonios "Voces de la comunidad cafetera". |
+| **Repositorio** | Portada a ancho completo y catálogo de publicaciones con buscador en tiempo real (por título o autor, sin importar tildes), filtros por tipo y botón "Cargar más". |
 | **Contacto** | Interfaz completa de CaféBot con sugerencias rápidas y datos de contacto institucional. |
 | **Global** | Navbar fija con indicador de sección activa, footer con redes sociales y **widget flotante de CaféBot** que comparte la misma conversación con la sección Contacto. |
 
-### 🤖 Sobre CaféBot
+###  Sobre CaféBot
 
 - Usa la API de **Google Gemini** con un *System Prompt* cerrado al contexto de CESURCAFÉ.
 - Si el usuario pregunta por temas ajenos (fútbol, política, tareas, etc.), el bot no responde y lo redirige al **Menú Principal** (Servicios, Líneas de investigación, Repositorio, Contacto).
@@ -62,7 +57,7 @@ El proyecto **no utiliza base de datos**: toda la información se carga desde ar
 
 ---
 
-## 🛠 Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 | Tecnología | Uso |
 |---|---|
@@ -76,7 +71,7 @@ El proyecto **no utiliza base de datos**: toda la información se carga desde ar
 
 ---
 
-## 📋 Requisitos previos
+##  Requisitos previos
 
 Antes de empezar, asegúrate de tener instalado:
 
@@ -94,7 +89,7 @@ git --version
 
 ---
 
-## 🚀 Instalación y ejecución
+##  Instalación y ejecución
 
 ### 1. Clonar el repositorio
 
@@ -137,7 +132,7 @@ Para detener el servidor, presiona `Ctrl + C` en la terminal.
 
 ---
 
-## 🔑 Configuración de CaféBot (Google Gemini)
+##  Configuración de CaféBot (Google Gemini)
 
 ### 1. Obtener una clave de API
 
@@ -168,7 +163,7 @@ Vite solo lee las variables de entorno al arrancar, así que detén el servidor 
 
 ---
 
-## 📜 Scripts disponibles
+##  Scripts disponibles
 
 Ejecútalos desde la raíz del proyecto:
 
@@ -181,14 +176,19 @@ Ejecútalos desde la raíz del proyecto:
 
 ---
 
-## 📁 Estructura del proyecto
+##  Estructura del proyecto
 
 ```
 Proyecto-Pesurcafe/
 ├── public/
 │   ├── favicon.svg
+│   ├── images/
+│   │   ├── nosotros.jpg         # Portada de la sección Nosotros
+│   │   ├── repositorio.jpg      # Portada de la sección Repositorio
+│   │   ├── servicios.jpg        # Portada de la sección Servicios
+│   │   └── timeline-sprite.webp # Sprite de 240 cuadros (Línea del tiempo 60-120 fps)
 │   └── videos/
-│       └── cafe.mp4            # Video inmersivo de fondo de Inicio
+│       └── cafe.mp4             # Video inmersivo de fondo de Inicio
 ├── src/
 │   ├── components/             # Componentes compartidos entre vistas
 │   │   ├── CafeBotWidget.jsx   # Avatar, mensajes, input y widget flotante
@@ -198,7 +198,7 @@ Proyecto-Pesurcafe/
 │   │   └── PublicationCard.jsx # Tarjeta reutilizable de publicaciones
 │   ├── context/
 │   │   └── ChatContext.jsx     # Estado global sincronizado de CaféBot
-│   ├── data/                   # 📌 TODO el contenido del sitio (sin base de datos)
+│   ├── data/                   #  TODO el contenido del sitio (sin base de datos)
 │   │   ├── institutional.js    # Navegación, proyectos, servicios, equipo y contacto
 │   │   └── publications.json   # Catálogo completo del repositorio
 │   ├── hooks/
@@ -227,7 +227,7 @@ Proyecto-Pesurcafe/
 
 ---
 
-## ✏️ Cómo editar el contenido
+##  Cómo editar el contenido
 
 Como no hay base de datos, **todo el contenido se modifica editando los 2 archivos de `src/data/`**. No es necesario tocar los componentes.
 
@@ -263,25 +263,26 @@ Añade un nuevo objeto al arreglo de `src/data/publications.json`:
 
 ---
 
-## 🎨 Paleta de colores
+##  Paleta de colores
 
-Paleta **"Tostión Editorial & Cereza"**, definida en `src/index.css`:
+Paleta **"Tostión Nocturna & Cereza"**, definida en `src/index.css`:
 
 | Variable | Color | Uso |
 |---|---|---|
-| `--bg-primary` | `#F6F4F0` | Fondo pergamino general |
-| `--bg-card` | `#FFFFFF` | Tarjetas claras |
-| `--bg-dark` | `#1C1613` | Bloques oscuros (espresso) |
-| `--bg-dark-card` | `#2A221E` | Tarjetas sobre fondo oscuro |
+| `--bg-primary` | `#181310` | Fondo general (Grano Tostado Oscuro) |
+| `--bg-card` | `#261E1A` | Tarjetas y contenedores (Tostión Media-Oscura) |
+| `--bg-chat` | `#1F1916` | Fondo de conversación de CaféBot |
+| `--bg-dark` | `#1C1613` | Bloques oscuros (Espresso Profundo) |
+| `--bg-dark-card` | `#2A221E` | Tarjetas internas oscuras |
 | `--accent-primary` | `#B8332A` | Rojo cereza: botones, CaféBot, estados activos |
 | `--accent-secondary` | `#C88A4B` | Caramelo: etiquetas, bordes, línea del tiempo |
-| `--text-primary` | `#1C1613` | Texto principal |
-| `--text-secondary` | `#6E655F` | Subtítulos y metadatos |
-| `--text-on-dark` | `#F6F4F0` | Texto sobre fondos oscuros |
+| `--text-primary` | `#F3EDE2` | Texto principal (Crema Pergamino) |
+| `--text-secondary` | `#B8ABA0` | Subtítulos y metadatos (Ceniza Cálida) |
+| `--text-on-dark` | `#F3EDE2` | Texto claro sobre fondos oscuros |
 
 ---
 
-## 📦 Compilar para producción
+##  Compilar para producción
 
 ```bash
 npm run build
@@ -299,7 +300,7 @@ El resultado queda en la carpeta **`dist/`**, que contiene solo archivos estáti
 
 ---
 
-## 🧩 Solución de problemas
+##  Solución de problemas
 
 <details>
 <summary><b>Windows: "No se puede cargar el archivo npm.ps1 porque la ejecución de scripts está deshabilitada"</b></summary>
@@ -349,7 +350,7 @@ npm install
 
 ---
 
-## 📄 Licencia
+##  Licencia
 
 © 2026 **CESURCAFÉ – Universidad Surcolombiana (USCO)**. Todos los derechos reservados.
 

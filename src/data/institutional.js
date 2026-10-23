@@ -44,18 +44,27 @@ export const PURPOSE_CARDS = [
     eyebrow: 'Nuestro propósito',
     title: 'Misión',
     text: 'Impulsar el desarrollo tecnológico y la innovación agroindustrial en la cadena productiva del café.',
+    detail:
+      'Articulamos investigación científica, análisis sensorial y extensión rural desde la Universidad Surcolombiana para fortalecer a las familias caficultoras del Huila.',
+    pillars: ['Ciencia aplicada', 'Transferencia regional'],
     icon: 'target',
   },
   {
     eyebrow: 'Futuro',
     title: 'Visión',
     text: 'Ser el centro de referencia científica y tecnológica en café de alta calidad a nivel internacional.',
+    detail:
+      'Proyectamos a la región Surcolombiana como referente en cafés especiales sostenibles, integrando biotecnología, agricultura de precisión y formación de talento.',
+    pillars: ['Proyección global', 'Sostenibilidad'],
     icon: 'compass',
   },
   {
     eyebrow: 'Logros',
     title: 'Reconocimientos',
     text: 'Certificaciones de calidad y premios por transferencia de tecnología regional.',
+    detail:
+      'Respaldados por el impacto directo en asociaciones de productores, protocolos de fermentación diferenciados y producción científica de acceso abierto.',
+    pillars: ['Calidad SCA', 'Impacto comunitario'],
     icon: 'award',
   },
 ];

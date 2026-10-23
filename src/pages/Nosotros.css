@@ -17,6 +17,100 @@
   margin-bottom: 1rem;
 }
 
+/* ---- Misión, Visión y Reconocimientos (más altos y grandes, encima de las cards de ¿Quiénes somos?) ---- */
+.who__purpose {
+  margin-bottom: 4rem;
+}
+
+.purpose__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: clamp(390px, 44vh, 460px);
+  padding: clamp(2.4rem, 3.5vw, 3.1rem) clamp(2rem, 3vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(200, 138, 75, 0.14), transparent 52%),
+    radial-gradient(circle at 10% 95%, rgba(184, 51, 42, 0.1), transparent 50%),
+    var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 22px 45px -24px rgba(0, 0, 0, 0.55);
+  transition: border-color var(--transition-base), transform var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.purpose__card:hover {
+  border-color: var(--accent-secondary);
+  transform: translateY(-6px);
+  box-shadow: 0 28px 55px -22px rgba(0, 0, 0, 0.7);
+}
+
+.purpose__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+
+.purpose__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.85rem;
+  height: 3.85rem;
+  border-radius: 50%;
+  background: rgba(184, 51, 42, 0.18);
+  border: 1px solid rgba(184, 51, 42, 0.35);
+  color: var(--accent-primary);
+}
+
+.purpose__num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(243, 237, 226, 0.14);
+}
+
+.purpose__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.purpose__title {
+  margin: 0.45rem 0 1rem;
+  font-size: clamp(2rem, 2.6vw, 2.35rem);
+  color: var(--text-on-dark);
+}
+
+.purpose__text {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-on-dark);
+}
+
+.purpose__detail {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.purpose__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
 .who__accordion {
   display: flex;
   gap: 0.75rem;
@@ -170,45 +264,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 66px;
-  height: 66px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--accent-secondary);
-  box-shadow: 0 10px 25px rgba(28, 22, 19, 0.2);
+  background: #19140E;
+  box-shadow:
+    0 22px 46px rgba(0, 0, 0, 0.78),
+    0 0 34px rgba(200, 138, 75, 0.28);
   overflow: hidden;
   position: relative;
 }
 
-.coffee-morph__svg {
+.coffee-morph__canvas {
+  display: block;
   width: 100%;
   height: 100%;
-  position: relative;
+  border-radius: 50%;
+  pointer-events: none;
 }
 
-.morph-stage {
-  transform-origin: 50px 50px;
+.coffee-morph__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
 }
 
-.morph-stage--parchment,
-.morph-stage--roast,
-.morph-stage--cup {
-  opacity: 0;
-  transform: scale(0.5);
+.coffee-morph__ring-track {
+  fill: none;
+  stroke: rgba(200, 138, 75, 0.25);
+  stroke-width: 2.2;
 }
 
-.coffee-morph__stage-pill {
-  margin-top: 0.5rem;
-  background: var(--bg-dark);
-  color: var(--text-on-dark);
-  border: 1px solid var(--accent-secondary);
-  padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-pill);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(28, 22, 19, 0.25);
+.coffee-morph__ring-progress {
+  fill: none;
+  stroke: var(--accent-secondary);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
 }
 
 .timeline__list {
@@ -220,7 +316,7 @@
 .timeline__item {
   position: relative;
   display: flex;
-  padding: 2.5rem 0;
+  padding: 8.5rem 0;
 }
 
 .timeline__item--left {
@@ -249,7 +345,7 @@
   font-size: 0.95rem;
   color: var(--text-primary);
   transform: translate(-50%, -50%);
-  transition: all var(--transition-base);
+  transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .timeline__node.is-active {
@@ -262,9 +358,9 @@
 
 .timeline__card {
   position: relative;
-  width: calc(50% - 3.5rem);
-  min-height: 160px;
-  padding: 1.75rem;
+  width: calc(50% - 6.25rem);
+  min-height: 220px;
+  padding: 2rem;
   border-radius: var(--radius-md);
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -275,17 +371,17 @@
   content: '';
   position: absolute;
   top: 50%;
-  width: 2rem;
+  width: 4.25rem;
   height: 2px;
   background: rgba(200, 138, 75, 0.4);
 }
 
 .timeline__item--left .timeline__card::before {
-  right: -2rem;
+  right: -4.25rem;
 }
 
 .timeline__item--right .timeline__card::before {
-  left: -2rem;
+  left: -4.25rem;
 }
 
 .timeline__year {
@@ -306,15 +402,20 @@
 
 @media screen and (max-width: 39.99875em) {
   .timeline__axis {
-    left: 1.6rem;
+    left: 2.5rem;
   }
 
   .timeline__node {
-    left: 1.6rem;
+    left: 2.5rem;
   }
 
   .coffee-morph {
-    left: 1.6rem;
+    left: 2.5rem;
+  }
+
+  .coffee-morph__badge {
+    width: 84px;
+    height: 84px;
   }
 
   .timeline__item,
@@ -323,7 +424,7 @@
   }
 
   .timeline__card {
-    width: calc(100% - 4.5rem);
+    width: calc(100% - 6rem);
   }
 
   .timeline__item--left .timeline__card::before {

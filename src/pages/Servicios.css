@@ -10,7 +10,7 @@
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 12vh;
+  gap: 28vh;
 }
 
 .stack-card__inner {

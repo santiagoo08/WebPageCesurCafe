@@ -26,16 +26,34 @@ export function CafeBotAvatar({ size = 40, showStatusDot = true, className = '' 
   );
 }
 
+/** Convierte fragmentos **en negrita** en elementos <strong> sin usar innerHTML. */
+function formatRichText(text) {
+  if (!text) return null;
+  const parts = String(text).split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
 export function ChatMessages() {
   const { messages, isLoading } = useChat();
-  const bottomRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const scrollParent = containerRef.current?.parentElement;
+    if (scrollParent) {
+      scrollParent.scrollTo({
+        top: scrollParent.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   }, [messages, isLoading]);
 
   return (
-    <div className="chat-messages" role="log" aria-live="polite">
+    <div className="chat-messages" ref={containerRef} role="log" aria-live="polite">
       <div className="chat-date-separator">
         <span>Hoy</span>
       </div>
@@ -50,7 +68,7 @@ export function ChatMessages() {
             {isBot && <CafeBotAvatar size={34} showStatusDot={false} />}
             <div className="chat-bubble-container">
               <div className={`chat-bubble chat-bubble--${isBot ? 'bot' : 'user'}`}>
-                <p className="chat-bubble__text">{msg.text}</p>
+                <p className="chat-bubble__text">{formatRichText(msg.text)}</p>
               </div>
               <span className="chat-bubble__time">{msg.time}</span>
             </div>
@@ -71,8 +89,6 @@ export function ChatMessages() {
           </div>
         </div>
       )}
-
-      <div ref={bottomRef} />
     </div>
   );
 }
