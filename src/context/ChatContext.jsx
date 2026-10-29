@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from 'react';
-import { askGemini } from '../services/gemini';
+import { WELCOME_MESSAGE, askGemini } from '../services/gemini';
 
 const ChatContext = createContext(undefined);
 
@@ -24,7 +24,7 @@ const INITIAL_MESSAGES = [
   {
     id: 'welcome-1',
     sender: 'bot',
-    text: '¡Hola! Soy CaféBot, el asistente virtual de CESURCAFÉ en la Universidad Surcolombiana. ¿En qué puedo orientarte hoy sobre nuestras investigaciones, proyectos o servicios?',
+    text: WELCOME_MESSAGE,
     time: '09:30 a. m.',
   },
 ];
