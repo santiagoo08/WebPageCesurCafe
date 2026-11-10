@@ -158,24 +158,90 @@ export const TESTIMONIALS = [
 // ---------------------------------------------------------------------------
 // Nosotros
 // ---------------------------------------------------------------------------
+
 export const WHO_WE_ARE_PANELS = [
-  { title: 'Investigación', caption: 'Ciencia aplicada a la cadena del café', tone: 'tone-microbiologia' },
-  { title: 'Laboratorio', caption: 'Calidad física y sensorial', tone: 'tone-sensorial' },
-  { title: 'Territorio', caption: 'Fincas y montañas del Huila', tone: 'tone-fitosanidad' },
-  { title: 'Comunidad', caption: 'Caficultores y jóvenes rurales', tone: 'tone-educacion-rural' },
+  {
+    title: 'Laboratorio de Análisis Sensorial',
+    caption: 'Evaluación de las características sensoriales y calidad del café.',
+    image: '/images/lab-analisis-sensorial.jpg',
+  },
+  {
+    title: 'Laboratorio de Microbiología de Alimentos',
+    caption: 'Espacio dedicado al estudio y análisis microbiológico de alimentos.',
+    tone: 'tone-microbiologia',
+    image: '/images/lab-microbiologia-alimentos.png',
+  },
+  {
+    title: 'Planta Piloto',
+    caption: 'Espacio para el desarrollo y evaluación de procesos tecnológicos.',
+    tone: 'tone-poscosecha',
+    image: '/images/planta-piloto.png',
+  },
+  {
+    title: 'Laboratorio de Análisis de Alimentos',
+    caption: 'Análisis y evaluación de las propiedades de los alimentos.',
+    image: '/images/lab-analisis-alimentos.png',
+  },
 ];
 
 export const TIMELINE_MILESTONES = [
-  { id: 1, year: '', title: '', text: '' },
-  { id: 2, year: '', title: '', text: '' },
-  { id: 3, year: '', title: '', text: '' },
-  { id: 4, year: '', title: '', text: '' },
+  {
+    id: 1,
+    year: '2010',
+    title: 'Los primeros pasos',
+    text: 'Inicio del proceso de consolidación institucional de CESURCAFÉ.',
+  },
+  {
+    id: 2,
+    year: '2012',
+    title: 'Creación oficial de CESURCAFÉ',
+    text: 'El Acuerdo 029 del 31 de julio de 2012 aprueba la creación del centro.',
+  },
+  {
+    id: 3,
+    year: '2022',
+    title: 'Fortalecimiento de infraestructura científica',
+    text: 'Proyecto de adecuación y equipamiento para fortalecer las actividades de ciencia, tecnología e innovación.',
+  },
+  {
+    id: 4,
+    year: '2024',
+    title: 'Reconocimiento de Minciencias',
+    text: 'CESURCAFÉ obtiene el reconocimiento como centro de investigación por tres años.',
+  },
 ];
 
 export const RESEARCHERS = [
-  { id: 'laura-sofia', name: 'Dra. Laura Sofía', role: 'Líder de Sostenibilidad', initials: 'LS' },
-  { id: 'juan-david', name: 'MSc. Juan David', role: 'Investigador de Poscosecha', initials: 'JD' },
-  { id: 'valentina-ruiz', name: 'Biól. Valentina Ruiz', role: 'Analista de Microbiología', initials: 'VR' },
+  {
+    id: 'juan-soto',
+    name: 'Juan Eduardo Soto Mora',
+    profession: 'Ingeniero Agrícola',
+    academicDegree: 'Posgradop', // Especialización, maestría o doctorado
+    role: 'Investigador del centro',
+    researchArea: 'Ciencia de los alimentos', // Línea de investigación
+    image: '/images/juan-soto.jpg',
+    initials: 'JS',
+  },
+  {
+    id: 'Pilar-cortez',
+    name: 'Maria del Pilar Cortez Gaona',
+    profession: 'Ingeniera Agrícola',
+    academicDegree: 'Posgrado', // Especialización, maestría o doctorado
+    role: 'coordinadora del centro',
+    researchArea: 'Procesamiento de alimentos', // Línea de investigación
+    image: '/images/pilar-Cortez.jpg',
+    initials: 'PC',
+  },
+  {
+    id: 'nelson-gutierrez',
+    name: 'Nelson Gutiérrez Guzman',
+    profession: 'Ingeniero Agrícola',
+    academicDegree: 'Doctorado', // Especialización, maestría o doctorado
+    role: 'Director del centro',
+    researchArea: 'alternativas sostenibles', // Línea de investigación
+    image: '/images/nelson-guitierrez.jpg',
+    initials: 'NG',
+  },
 ];
 
 // ---------------------------------------------------------------------------

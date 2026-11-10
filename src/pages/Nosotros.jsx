@@ -395,18 +395,46 @@ function ResearchersCarousel() {
                   aria-hidden={!isCenter}
                   onClick={() => go(pos - 1)}
                 >
-                  <div className="researcher-card__photo">
-                    {r.photo ? (
-                      <img src={r.photo} alt={r.name} loading="lazy" />
-                    ) : (
-                      <span className="researcher-card__initials">{r.initials}</span>
-                    )}
-                  </div>
-                  <div className="researcher-card__body">
-                    <span className="eyebrow">Investigador</span>
-                    <h3 className="researcher-card__name">{r.name}</h3>
-                    <p className="researcher-card__role">{r.role}</p>
-                  </div>
+                  
+<div className="researcher-card__photo">
+  {r.image ? (
+    <img
+      src={r.image}
+      alt={`Fotografía de ${r.name}`}
+      loading="lazy"
+    />
+  ) : (
+    <span className="researcher-card__initials">
+      {r.initials}
+    </span>
+  )}
+</div>
+
+<div className="researcher-card__body">
+  <span className="eyebrow">
+    {r.role}
+  </span>
+
+  <h3 className="researcher-card__name">
+    {r.name}
+  </h3>
+
+  <p className="researcher-card__role">
+    {r.profession}
+  </p>
+
+  {r.academicDegree && (
+    <p className="researcher-card__role">
+      {r.academicDegree}
+    </p>
+  )}
+
+  {r.researchArea && (
+    <p className="researcher-card__role">
+      Área: {r.researchArea}
+    </p>
+  )}
+</div>
                 </article>
               );
             })}
