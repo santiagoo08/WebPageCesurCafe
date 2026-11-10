@@ -303,24 +303,61 @@ function Timeline() {
           </div>
 
           <ol className="timeline__list">
-            {TIMELINE_MILESTONES.map((m, i) => (
-              <li
-                key={m.id}
-                className={`timeline__item timeline__item--${i % 2 === 0 ? 'left' : 'right'}`}
-              >
-                <span className="timeline__node" aria-hidden="true">
-                  {String(m.id).padStart(2, '0')}
-                </span>
-                <article
-                  className="timeline__card"
-                  data-reveal={i % 2 === 0 ? 'left' : 'right'}
-                >
-                  <span className="timeline__year">{m.year}</span>
-                  <h3 className="timeline__card-title">{m.title}</h3>
-                  <p className="timeline__card-text">{m.text}</p>
-                </article>
-              </li>
-            ))}
+            {/* HITO 01 */}
+            <li className="timeline__item timeline__item--left">
+              <span className="timeline__node" aria-hidden="true">
+                01
+              </span>
+              <article className="timeline__card" data-reveal="left">
+                <span className="timeline__year">2010 - 2012</span>
+                <h3 className="timeline__card-title">Antecedentes e Idea de Origen</h3>
+                <p className="timeline__card-text">
+                  Ante el acelerado crecimiento de la producción y comercialización de cafés de alta calidad en la región surcolombiana, la Universidad Surcolombiana identificó la urgencia de contar con un organismo científico enfocado en resolver las problemáticas del gremio. Con este propósito, el Grupo de Investigación en Agroindustria formuló la propuesta técnica del centro, logrando los avales del Comité Central de Investigación en febrero de 2012 y del Consejo de Facultad de Ingeniería en marzo del mismo año.
+                </p>
+              </article>
+            </li>
+
+            {/* HITO 02 */}
+            <li className="timeline__item timeline__item--right">
+              <span className="timeline__node" aria-hidden="true">
+                02
+              </span>
+              <article className="timeline__card" data-reveal="right">
+                <span className="timeline__year">2012</span>
+                <h3 className="timeline__card-title">Creación Institucional</h3>
+                <p className="timeline__card-text">
+                  La institución cobró vida jurídica formal el 31 de julio de 2012 mediante el Acuerdo N.º 029 del Consejo Superior Universitario. CESURCAFÉ quedó adscrito a la Facultad de Ingeniería bajo la dirección del Dr. Nelson Gutiérrez Guzmán, enfocado en estructurar líneas clave como la perfilación sensorial, la fermentación, el secado de productos biológicos y el tratamiento de aguas residuales del beneficio.
+                </p>
+              </article>
+            </li>
+
+            {/* HITO 03 */}
+            <li className="timeline__item timeline__item--left">
+              <span className="timeline__node" aria-hidden="true">
+                03
+              </span>
+              <article className="timeline__card" data-reveal="left">
+                <span className="timeline__year">Consolidación</span>
+                <h3 className="timeline__card-title">Redes e Investigación</h3>
+                <p className="timeline__card-text">
+                  En su etapa de consolidación, el centro afianzó su portafolio de servicios tecnológicos para los caficultores e integró importantes redes internacionales de conocimiento con aliados como la Universidad de Manchester, la Universidad Federal de Lavras, la Universidad de los Andes y la Gobernación del Huila. Estas alianzas impulsaron el desarrollo investigativo y la transferencia de tecnología en toda la cadena de valor.
+                </p>
+              </article>
+            </li>
+
+            {/* HITO 04 */}
+            <li className="timeline__item timeline__item--right">
+              <span className="timeline__node" aria-hidden="true">
+                04
+              </span>
+              <article className="timeline__card" data-reveal="right">
+                <span className="timeline__year">Actualidad</span>
+                <h3 className="timeline__card-title">Proyección y Escuela del Café</h3>
+                <p className="timeline__card-text">
+                  Hoy en día, CESURCAFÉ se posiciona como el eje científico y académico del grano en la región, sirviendo de base para la articulación de la Escuela Universitaria del Café junto a la Gobernación del Huila. Este hito fortalece la formación profesional en el sector e impulsa la innovación continua para el posicionamiento del café huilense a nivel global.
+                </p>
+              </article>
+            </li>
           </ol>
         </div>
       </div>
