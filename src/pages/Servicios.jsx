@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SERVICES, TESTIMONIALS } from '../data/institutional';
+import { SERVICES, VISIBLE_TESTIMONIALS } from '../data/institutional';
 import Icon from '../components/Icon';
 import ImageCarousel from '../components/ImageCarousel';
 import { getServiceImages } from '../data/serviceImages';
@@ -12,6 +12,8 @@ import './Servicios.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const STACK_STEP = 24;
+
+const SOURCE_LABELS = { instagram: 'Instagram', facebook: 'Facebook', presencial: 'Testimonio presencial' };
 
 /** Tarjetas de servicios con efecto de apilamiento (GSAP ScrollTrigger, pin: true). */
 function StackedServices() {
@@ -166,6 +168,8 @@ function Testimonials() {
     el.scrollBy({ left: dir * amount, behavior: 'smooth' });
   };
 
+  if (VISIBLE_TESTIMONIALS.length === 0) return null;
+
   return (
     <section className="testimonials on-dark section-padding" ref={sectionRef}>
       <div className="grid-container">
@@ -177,14 +181,25 @@ function Testimonials() {
         </div>
 
         <div className="testimonials__track" ref={trackRef} onScroll={updateEdges}>
-          {TESTIMONIALS.map((t, i) => (
+          {VISIBLE_TESTIMONIALS.map((t, i) => (
             <article className="testimonial" key={t.id} data-reveal>
               <div className="testimonial__top">
                 <div className="testimonial__top-row">
                   <span className="eyebrow testimonial__category">{t.category}</span>
-                  <Link to="/repositorio" className="testimonial__link">
-                    + Ver proyecto
-                  </Link>
+                  {t.example ? (
+                    <span className="testimonial__link testimonial__link--example">
+                      Ejemplo · no se publica
+                    </span>
+                  ) : t.sourceUrl ? (
+                    <a
+                      href={t.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="testimonial__link"
+                    >
+                      Ver en {SOURCE_LABELS[t.source] ?? 'la fuente'} ↗
+                    </a>
+                  ) : null}
                 </div>
                 <span className="num-badge">{String(i + 1).padStart(2, '0')}</span>
               </div>
@@ -193,7 +208,10 @@ function Testimonials() {
                 <blockquote className="testimonial__quote">“{t.quote}”</blockquote>
                 <footer className="testimonial__author">
                   <strong>{t.author}</strong>
-                  <span>{t.role}</span>
+                  <span>
+                    {t.role}
+                    {t.date && ` · ${new Date(`${t.date}T12:00:00`).toLocaleDateString('es-CO', { month: 'long', year: 'numeric' })}`}
+                  </span>
                 </footer>
               </div>
             </article>

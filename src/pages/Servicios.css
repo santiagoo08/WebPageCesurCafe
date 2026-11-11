@@ -209,3 +209,9 @@
   gap: 0.75rem;
   margin-top: 2rem;
 }
+
+.testimonial__link--example {
+  border-style: dashed;
+  opacity: 0.8;
+  cursor: default;
+}

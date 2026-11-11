@@ -3,6 +3,7 @@ import publicationsJson from './publications.json';
 import publicationTranslations from './publication-translations.json';
 import rawResearchers from './researchers.json';
 import orcidData from './orcid-profiles.json';
+import testimonialsData from './testimonials.json';
 
 // Publicaciones con su título traducido al español (si existe en publication-translations.json).
 const rawPublications = publicationsJson.map((p) => ({
@@ -173,40 +174,15 @@ export const SERVICES = [
   },
 ];
 
-export const TESTIMONIALS = [
-  {
-    id: 't1',
-    category: 'Perfil de taza',
-    quote:
-      'Gracias a las pruebas de perfil de taza pudimos identificar las notas florales de nuestro café y exportar a Europa con un precio diferenciado.',
-    author: 'María Consuelo Polanía',
-    role: 'Caficultora de San Agustín',
-  },
-  {
-    id: 't2',
-    category: 'Fermentación',
-    quote:
-      'El acompañamiento en fermentación controlada nos permitió estandarizar la calidad de todos los asociados y reducir los defectos en taza.',
-    author: 'Ing. Jorge Trujillo',
-    role: 'Asociación de Cafés Especiales',
-  },
-  {
-    id: 't3',
-    category: 'Formación',
-    quote:
-      'Las cartillas y talleres nos enseñaron a llevar registros de la finca. Hoy tomamos decisiones con datos y no solo con intuición.',
-    author: 'Andrés Felipe Cuéllar',
-    role: 'Joven caficultor de Pitalito',
-  },
-  {
-    id: 't4',
-    category: 'Monitoreo',
-    quote:
-      'Los sensores de campo nos alertaron a tiempo sobre condiciones favorables para la roya. Salvamos gran parte de la cosecha.',
-    author: 'Luz Marina Perdomo',
-    role: 'Productora de La Plata',
-  },
-];
+// Testimonios: viven en testimonials.json (guía en docs/TESTIMONIOS.md).
+// TESTIMONIALS solo incluye los verificados (permiso de la persona y no son ejemplo).
+// Durante el desarrollo (npm run dev) también se muestran los de ejemplo, marcados como tales.
+const ALL_TESTIMONIALS = testimonialsData.testimonials ?? [];
+export const TESTIMONIALS = ALL_TESTIMONIALS.filter((t) => t.consent === true && !t.example);
+export const VISIBLE_TESTIMONIALS = import.meta.env?.DEV
+  ? [...TESTIMONIALS, ...ALL_TESTIMONIALS.filter((t) => t.example)]
+  : TESTIMONIALS;
+
 
 // ---------------------------------------------------------------------------
 // Nosotros
