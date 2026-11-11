@@ -1,0 +1,11 @@
+Fotos del servicio "procesos-fermentacion" para el carrusel de la página Servicios.
+
+1. Copia aquí las fotos (.jpg, .jpeg, .png, .webp o .avif). No hay que tocar código:
+   el carrusel las detecta solo al ejecutar "npm run dev" o "npm run build".
+2. El orden es alfabético: usa números al inicio del nombre (01-, 02-, 03-...).
+3. El nombre del archivo se usa como descripción de la foto para lectores de pantalla:
+   "02-catacion-de-muestras.jpg" → "Catacion de muestras".
+   Para una descripción exacta, agrégala en imageAlts del servicio en src/data/institutional.js.
+4. Recomendado: fotos horizontales de unos 1600 px de ancho y menos de 400 KB
+   (convierte a .webp o .jpg con calidad 80).
+5. Usa solo fotos propias del centro o con permiso/licencia libre.

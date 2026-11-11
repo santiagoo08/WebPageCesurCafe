@@ -4,7 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SERVICES, TESTIMONIALS } from '../data/institutional';
 import Icon from '../components/Icon';
-import MediaVisual from '../components/MediaVisual';
+import ImageCarousel from '../components/ImageCarousel';
+import { getServiceImages } from '../data/serviceImages';
 import useScrollReveal, { MOTION_OK, REVEAL_EASE } from '../hooks/useScrollReveal';
 import './Servicios.css';
 
@@ -114,11 +115,12 @@ function StackedServices() {
                   </Link>
                 </div>
                 <div className="cell medium-6 stack-card__visual">
-                  <MediaVisual
+                  <ImageCarousel
+                    images={getServiceImages(service.id, service.imageAlts)}
+                    label={`Fotos: ${service.title}`}
+                    emptyLabel="Próximamente fotos del servicio"
+                    emptyHint={import.meta.env.DEV ? `src/assets/servicios/${service.id}/` : undefined}
                     tone={service.tone}
-                    image={service.image}
-                    video={service.video}
-                    label="Video / imagen del servicio"
                     className="stack-card__media"
                   />
                 </div>

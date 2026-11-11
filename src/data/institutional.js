@@ -123,6 +123,8 @@ export const PURPOSE_CARDS = [
 // ---------------------------------------------------------------------------
 // Servicios y Testimonios
 // ---------------------------------------------------------------------------
+// Las fotos de cada servicio se cargan solas desde src/assets/servicios/<id>/ (ver LEEME.txt).
+// Opcional: imageAlts: { '01-foto.jpg': 'Descripción exacta de la foto' }
 export const SERVICES = [
   {
     id: 'laboratorio-calidad',
