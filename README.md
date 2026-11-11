@@ -355,3 +355,33 @@ npm install
 © 2026 **CESURCAFÉ – Universidad Surcolombiana (USCO)**. Todos los derechos reservados.
 
 Proyecto de uso académico desarrollado en el Semillero de Investigación CESURCAFÉ. No se permite su reproducción, distribución o uso comercial sin autorización expresa de la institución.
+
+---
+
+##  Perfiles ORCID de los investigadores
+
+La sección **Nosotros** muestra el perfil público ORCID de cada investigador (afiliación, biografía, palabras clave y trabajos). Los trabajos que coinciden con una publicación del repositorio (por DOI o título) enlazan a ella.
+
+1. Escribe el ORCID iD de cada investigador en `src/data/researchers.json` (campo `"orcid"`, formato `0000-0000-0000-0000`).
+2. Ejecuta `npm run sync:orcid`. El script consulta la API pública de ORCID y genera `src/data/orcid-profiles.json`.
+3. Revisa el resultado con `npm run dev` y haz commit del JSON generado.
+
+No se necesita clave. Opcionalmente puedes definir `ORCID_CLIENT_ID` y `ORCID_CLIENT_SECRET` (credenciales gratuitas de la Public API de ORCID) para obtener límites más altos. Las credenciales solo se usan en el script, nunca en el navegador. Vuelve a ejecutar el comando cuando los investigadores actualicen su perfil.
+
+---
+
+##  API externa: Open-Meteo (monitoreo agroclimático)
+
+La página de **Inicio** incluye el panel **"Monitoreo agroclimático del Huila"**, que consulta en vivo la API pública de [Open-Meteo](https://open-meteo.com) desde el navegador.
+
+| | |
+|---|---|
+| **Endpoint** | `GET https://api.open-meteo.com/v1/forecast` |
+| **Clave** | No requiere (gratuita para uso no comercial; licencia de datos CC BY 4.0) |
+| **Código** | `src/services/openMeteo.js` (cliente) y `src/components/AgroClimaPanel.jsx` (interfaz) |
+| **Municipios** | Neiva, Pitalito, Garzón y La Plata |
+| **Datos** | Temperatura, humedad relativa, lluvia, viento, humedad del suelo (3–9 cm), evapotranspiración y pronóstico de 7 días |
+
+Además, el panel calcula una **recomendación orientativa de secado del café** según la probabilidad y cantidad de lluvia de cada día. Las respuestas se guardan en caché 10 minutos para no repetir llamadas. Si la API falla, se muestra un mensaje con el botón "Reintentar".
+
+Para comprobar la llamada: abre la página de Inicio, presiona F12 → pestaña **Red (Network)** y busca la petición a `api.open-meteo.com`.

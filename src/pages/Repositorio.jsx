@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
+import { useSearchParams } from 'react-router';
 import { PUBLICATIONS, normalizeText } from '../data/institutional';
 import PublicationCard from '../components/PublicationCard';
 import Icon from '../components/Icon';
@@ -16,7 +17,8 @@ const CELL = '.explorer__cell';
 const motionOk = () => window.matchMedia(MOTION_OK).matches;
 
 export default function Repositorio() {
-  const [query, setQuery] = useState('');
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(() => searchParams.get('q') ?? '');
   const [tab, setTab] = useState('Todos');
   const [visible, setVisible] = useState(PAGE_SIZE);
 

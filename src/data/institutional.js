@@ -1,5 +1,7 @@
 // Catálogo estático de datos institucionales, navegación, proyectos y publicaciones.
 import rawPublications from './publications.json';
+import rawResearchers from './researchers.json';
+import orcidData from './orcid-profiles.json';
 
 // ---------------------------------------------------------------------------
 // Navegación y Redes Sociales
@@ -169,18 +171,18 @@ export const WHO_WE_ARE_PANELS = [
     title: 'Laboratorio de Microbiología de Alimentos',
     caption: 'Espacio dedicado al estudio y análisis microbiológico de alimentos.',
     tone: 'tone-microbiologia',
-    image: '/images/lab-microbiologia-alimentos.png',
+    image: '/images/lab-microbiologia-alimentos.webp',
   },
   {
     title: 'Planta Piloto',
     caption: 'Espacio para el desarrollo y evaluación de procesos tecnológicos.',
     tone: 'tone-poscosecha',
-    image: '/images/planta-piloto.png',
+    image: '/images/planta-piloto.webp',
   },
   {
     title: 'Laboratorio de Análisis de Alimentos',
     caption: 'Análisis y evaluación de las propiedades de los alimentos.',
-    image: '/images/lab-analisis-alimentos.png',
+    image: '/images/lab-analisis-alimentos.webp',
   },
 ];
 
@@ -211,38 +213,47 @@ export const TIMELINE_MILESTONES = [
   },
 ];
 
-export const RESEARCHERS = [
-  {
-    id: 'juan-soto',
-    name: 'Juan Eduardo Soto Mora',
-    profession: 'Ingeniero Agrícola',
-    academicDegree: 'Posgradop', // Especialización, maestría o doctorado
-    role: 'Investigador del centro',
-    researchArea: 'Ciencia de los alimentos', // Línea de investigación
-    image: '/images/juan-soto.jpg',
-    initials: 'JS',
-  },
-  {
-    id: 'Pilar-cortez',
-    name: 'Maria del Pilar Cortez Gaona',
-    profession: 'Ingeniera Agrícola',
-    academicDegree: 'Posgrado', // Especialización, maestría o doctorado
-    role: 'coordinadora del centro',
-    researchArea: 'Procesamiento de alimentos', // Línea de investigación
-    image: '/images/pilar-Cortez.jpg',
-    initials: 'PC',
-  },
-  {
-    id: 'nelson-gutierrez',
-    name: 'Nelson Gutiérrez Guzman',
-    profession: 'Ingeniero Agrícola',
-    academicDegree: 'Doctorado', // Especialización, maestría o doctorado
-    role: 'Director del centro',
-    researchArea: 'alternativas sostenibles', // Línea de investigación
-    image: '/images/nelson-guitierrez.jpg',
-    initials: 'NG',
-  },
-];
+// Los datos base (nombre, cargo, foto, ORCID) viven en researchers.json; el perfil ORCID (afiliación,
+// biografía y trabajos) se genera con `npm run sync:orcid` en orcid-profiles.json.
+const titleKey = (t) =>
+  normalizeText(String(t ?? ''))
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+const doiKey = (d) =>
+  String(d ?? '')
+    .trim()
+    .replace(/^https?:\/\/(dx\.)?doi\.org\//i, '')
+    .toLowerCase();
+
+const REPO_BY_DOI = new Map(rawPublications.filter((p) => p.doi).map((p) => [doiKey(p.doi), p]));
+const REPO_BY_TITLE = new Map(rawPublications.map((p) => [titleKey(p.title), p]));
+
+/** Enlaza un trabajo de ORCID con la publicación equivalente del repositorio (por DOI o título). */
+function matchRepository(work) {
+  return (work.doi && REPO_BY_DOI.get(doiKey(work.doi))) || REPO_BY_TITLE.get(titleKey(work.title)) || null;
+}
+
+export const ORCID_SYNCED_AT = orcidData.generatedAt ?? null;
+
+export const RESEARCHERS = rawResearchers.map((r) => {
+  const orcid = String(r.orcid ?? '').trim().toUpperCase();
+  const profile = orcid ? (orcidData.profiles?.[orcid] ?? null) : null;
+  const repoPublications = rawPublications.filter((p) => p.author === r.name);
+  return {
+    ...r,
+    orcid: orcid || null,
+    profile: profile
+      ? {
+          ...profile,
+          works: (profile.works ?? []).map((w) => {
+            const repo = matchRepository(w);
+            return { ...w, repoId: repo?.id ?? null, repoTitle: repo?.title ?? null };
+          }),
+        }
+      : null,
+    repoPublications,
+  };
+});
 
 // ---------------------------------------------------------------------------
 // Contacto y Líneas de investigación

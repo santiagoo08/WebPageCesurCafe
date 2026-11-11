@@ -1,0 +1,245 @@
+/* ---- Panel agroclimático en vivo (API Open-Meteo) ---- */
+.agroclima__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.agroclima__head .section-header {
+  margin-bottom: 0;
+}
+
+.agroclima__intro {
+  max-width: 36rem;
+  margin: 0.5rem 0 0;
+  color: var(--text-secondary);
+}
+
+.agroclima__live {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+  background: #4caf50;
+  vertical-align: middle;
+  animation: agroclima-pulse 2s ease-in-out infinite;
+}
+
+@keyframes agroclima-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agroclima__live {
+    animation: none;
+  }
+}
+
+.agroclima__body {
+  display: grid;
+  gap: 1.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.agroclima__body.is-loading {
+  opacity: 0.55;
+}
+
+.agroclima__now {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) 2fr;
+  gap: 1.5rem;
+  padding: 2rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+}
+
+.agroclima__now-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.agroclima__place {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.agroclima__temp {
+  font-family: var(--font-display);
+  font-size: 3.25rem;
+  line-height: 1;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.agroclima__condition {
+  color: var(--text-primary);
+}
+
+.agroclima__advice {
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.agroclima__advice--good {
+  background: rgba(76, 175, 80, 0.18);
+  color: #9fdca2;
+}
+
+.agroclima__advice--warn {
+  background: rgba(200, 138, 75, 0.2);
+  color: var(--accent-secondary);
+}
+
+.agroclima__advice--bad {
+  background: rgba(184, 51, 42, 0.22);
+  color: #f1a49d;
+}
+
+.agroclima__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.agroclima__metrics div {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(243, 237, 226, 0.04);
+}
+
+.agroclima__metrics dt {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.agroclima__metrics dd {
+  margin: 0.3rem 0 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.agroclima__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  list-style: none;
+}
+
+.agroclima__day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 0.9rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.agroclima__day-name {
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  color: var(--text-secondary);
+}
+
+.agroclima__day-temp {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.agroclima__day-temp small {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.agroclima__day-rain {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.agroclima__dot {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+
+.agroclima__dot--good {
+  background: #4caf50;
+}
+
+.agroclima__dot--warn {
+  background: var(--accent-secondary);
+}
+
+.agroclima__dot--bad {
+  background: var(--accent-primary);
+}
+
+.agroclima__error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.agroclima__error p {
+  margin: 0;
+}
+
+.agroclima__credit {
+  margin: 1.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.agroclima__credit a {
+  color: var(--accent-secondary);
+}
+
+@media screen and (max-width: 63.99875em) {
+  .agroclima__now {
+    grid-template-columns: 1fr;
+  }
+
+  .agroclima__days {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 39.99875em) {
+  .agroclima__now {
+    padding: 1.5rem;
+  }
+
+  .agroclima__days {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

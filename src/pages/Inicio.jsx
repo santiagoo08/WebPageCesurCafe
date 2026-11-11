@@ -7,6 +7,7 @@ import {
   PUBLICATIONS,
   SERVICES,
 } from '../data/institutional';
+import AgroClimaPanel from '../components/AgroClimaPanel';
 import PublicationCard from '../components/PublicationCard';
 import Icon from '../components/Icon';
 import { MOTION_OK } from '../hooks/useScrollReveal';
@@ -308,6 +309,9 @@ export default function Inicio() {
           </div>
         </div>
       </section>
+
+      {/* Panel agroclimático en vivo (API Open-Meteo) */}
+      <AgroClimaPanel />
 
       {/* Resumen de Producción Científica */}
       <section className="repo-preview section-padding">

@@ -1,0 +1,308 @@
+{
+  "generatedAt": "2026-11-11T11:44:29.423Z",
+  "profiles": {
+    "0000-0001-5079-7968": {
+      "orcid": "0000-0001-5079-7968",
+      "url": "https://orcid.org/0000-0001-5079-7968",
+      "name": "Juan E. S. Mora",
+      "biography": "Profesional en Ingeniería Agrícola por la Universidad Surcolombiana (2020). Desde diciembre de 2019 desempeña el cargo de Auxiliar en Investigación en Café en el Centro Surcolombiano de Investigación en Café CESURCAFÉ. Actualmente es bolsista CAPES BRA como estudiante de la maestría en Ciencia de los Alimentos adscrita al departamento de Ciência de los Alimentos (Concepto 6 CAPES), en la Universidad Federal de Lavras (Brasil, Mg). Cuenta con experiencia en el área de análisis sensorial, ciencia y tecnología de alimentos.",
+      "keywords": [],
+      "affiliation": null,
+      "worksCount": 2,
+      "works": [
+        {
+          "putCode": 151587850,
+          "title": "AVALIAÇÃO DA EXATIDÃO DE DIFERENTES METODOLOGIAS PARA DETERMINAÇÃO DO TEOR DE ÁGUA EM GRÃOS DE CAFÉ C. ARABICA VAR.BOURBON E CATUAÍ",
+          "year": 2023,
+          "type": "Artículo",
+          "journal": "AVALIAÇÃO DA EXATIDÃO DEDIFERENTES METODOLOGIAS PARADETERMINAÇÃO DO TEOR DE ÁGUAEM GRÃOS DE CAFÉ C. ARABICAVAR.BOURBON E CATUAÍ",
+          "doi": "10.5281/zenodo.10276754",
+          "url": "https://doi.org/10.5281/zenodo.10276754"
+        },
+        {
+          "putCode": 108336938,
+          "title": "Evaluación del comportamiento del color del vino artesanal de curuba “Son del Alba”",
+          "year": 2021,
+          "type": "Artículo",
+          "journal": "Ingeniería y Región",
+          "doi": "10.25054/22161325.2915",
+          "url": "https://doi.org/10.25054/22161325.2915"
+        }
+      ]
+    },
+    "0000-0001-7654-3659": {
+      "orcid": "0000-0001-7654-3659",
+      "url": "https://orcid.org/0000-0001-7654-3659",
+      "name": "María del Pilar Cortés Gaona",
+      "biography": null,
+      "keywords": [],
+      "affiliation": null,
+      "worksCount": 2,
+      "works": [
+        {
+          "putCode": 209859368,
+          "title": "Effect of Coffee Fermentation with Candida sphaerica and Lactiplantibacillus plantarum on the Development of Sensory Characteristics",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Revista Politécnica",
+          "doi": "10.33333/rp.vol57n1.02",
+          "url": "https://doi.org/10.33333/rp.vol57n1.02"
+        },
+        {
+          "putCode": 209859367,
+          "title": "Evaluation of Lactic Acid Bacteria (LAB) against Shigella sonnei ATCC 25931",
+          "year": 2021,
+          "type": "Artículo",
+          "journal": "Revista Facultad de Ingeniería Universidad de Antioquia",
+          "doi": "10.17533/udea.redin.20210958",
+          "url": "https://doi.org/10.17533/udea.redin.20210958"
+        }
+      ]
+    },
+    "0000-0003-2499-8066": {
+      "orcid": "0000-0003-2499-8066",
+      "url": "https://orcid.org/0000-0003-2499-8066",
+      "name": "Nelson Gutierrez Guzman",
+      "biography": null,
+      "keywords": [
+        "Coffee quality",
+        "Coffee sensory analysis"
+      ],
+      "affiliation": {
+        "organization": "Universidad Surcolombiana",
+        "department": "Ingeniería Agrícola",
+        "role": "Profesor Titular",
+        "startYear": 2006,
+        "current": true
+      },
+      "worksCount": 69,
+      "works": [
+        {
+          "putCode": 229147074,
+          "title": "Dataset and response surface modeling tools for data-driven optimization of a functional cupuassu (Theobroma grandiflorum) cremogenate",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2026.113305",
+          "url": "https://doi.org/10.1016/j.dib.2026.113305"
+        },
+        {
+          "putCode": 212399920,
+          "title": "An insular in situ Coffea arabica resource from Rapa Nui (Easter Island): simple sequence repeat (SSR) uniformity and biochemical evaluation of material consistent with the Typica lineage",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Genetic Resources and Crop Evolution",
+          "doi": "10.1007/s10722-026-02789-6",
+          "url": "https://doi.org/10.1007/s10722-026-02789-6"
+        },
+        {
+          "putCode": 206698021,
+          "title": "Data-driven modeling of water adsorption isotherms in cocoa beans: Dataset and Python-based Machine Learning tools for multivariate analysis and storage management",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2026.112616",
+          "url": "https://doi.org/10.1016/j.dib.2026.112616"
+        },
+        {
+          "putCode": 209841864,
+          "title": "Effect of Coffee Fermentation with Candida sphaerica and Lactiplantibacillus plantarum on the Development of Sensory Characteristics",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Revista Politécnica",
+          "doi": "10.33333/rp.vol57n1.02",
+          "url": "https://doi.org/10.33333/rp.vol57n1.02"
+        },
+        {
+          "putCode": 219447369,
+          "title": "Valorization of Coffee Pulp: Effect of Roasting Profile and Grinding Level on Single‐Serve Beverages Prepared in Compostable Capsules",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Journal of Food Processing and Preservation",
+          "doi": "10.1155/jfpp/8241564",
+          "url": "https://doi.org/10.1155/jfpp/8241564"
+        },
+        {
+          "putCode": 223031625,
+          "title": "Commercial yeast fermentation and 7P-Fermaestro® processing: Strategies to improve sensory and chemical qualities in Coffea arabica L. var. Castillo",
+          "year": 2026,
+          "type": "Artículo",
+          "journal": "Ciência e Agrotecnologia",
+          "doi": "10.1590/1413-7054202650001126",
+          "url": "https://doi.org/10.1590/1413-7054202650001126"
+        },
+        {
+          "putCode": 211709703,
+          "title": "kernel partial least squares regression for multivariate shelf-life quality prediction of achira-starch biscuits",
+          "year": 2026,
+          "type": "Preprint",
+          "journal": null,
+          "doi": "10.2139/ssrn.6577043",
+          "url": "https://doi.org/10.2139/ssrn.6577043"
+        },
+        {
+          "putCode": 197483071,
+          "title": "Rapa Nui as an untapped genetic reservoir of Coffea arabica in the South Pacific",
+          "year": 2025,
+          "type": "Preprint",
+          "journal": null,
+          "doi": "10.21203/rs.3.rs-8157549/v1",
+          "url": "https://doi.org/10.21203/rs.3.rs-8157549/v1"
+        },
+        {
+          "putCode": 191111582,
+          "title": "Natural microbial inocula for efficient cacao fermentation in Colombia",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Food Chemistry Advances",
+          "doi": "10.1016/j.focha.2025.101102",
+          "url": "https://doi.org/10.1016/j.focha.2025.101102"
+        },
+        {
+          "putCode": 186405917,
+          "title": "Dataset and machine learning-based computer-aided tools for modeling working sorption isotherms in dried parchment and green coffee beans",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2025.111738",
+          "url": "https://doi.org/10.1016/j.dib.2025.111738"
+        },
+        {
+          "putCode": 186419943,
+          "title": "Dataset and multivariate statistical tools for mathematical modeling of water desorption isotherms and infrared spectral properties of cupuassu (Theobroma grandiflorum L.) pulp",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2025.111720",
+          "url": "https://doi.org/10.1016/j.dib.2025.111720"
+        },
+        {
+          "putCode": 183956128,
+          "title": "Large dataset on Fourier transform near infrared (FT-NIR) spectroscopy of green and roasted specialty coffee: Preprocessed infrared spectra and sensory scores for machine learning-based quality monitoring",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2025.111609",
+          "url": "https://doi.org/10.1016/j.dib.2025.111609"
+        },
+        {
+          "putCode": 179747011,
+          "title": "Monitoring moisture content in parchment coffee beans during drying using Fourier Transform near infrared (FT-NIR) spectroscopy: A dataset for calibrating chemometric-based models for moisture prediction",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2025.111436",
+          "url": "https://doi.org/10.1016/j.dib.2025.111436"
+        },
+        {
+          "putCode": 174513172,
+          "title": "Adsorption isotherms in roasted specialty coffee (Coffea arabica L.): Dataset and statistical tools for optimizing storage conditions and enhancing shelf life",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2024.111247",
+          "url": "https://doi.org/10.1016/j.dib.2024.111247"
+        },
+        {
+          "putCode": 174500703,
+          "title": "Mid-infrared spectra of dried and roasted cocoa (Theobroma cacao L.): A dataset for machine learning-based classification of cocoa varieties and prediction of theobromine and caffeine content",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2024.111243",
+          "url": "https://doi.org/10.1016/j.dib.2024.111243"
+        },
+        {
+          "putCode": 185360299,
+          "title": "Analysis of Machine Learning Algorithms for the Computer Simulation of Moisture Sorption Isotherms of Coffee Beans",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Food and Bioprocess Technology",
+          "doi": "10.1007/s11947-025-03785-x",
+          "url": "https://doi.org/10.1007/s11947-025-03785-x"
+        },
+        {
+          "putCode": 185360307,
+          "title": "Bioactive and neoformed compounds in coffee: Dietary intake and population exposure in Neiva, Colombia",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Food Chemistry X",
+          "doi": "10.1016/j.fochx.2025.102492",
+          "url": "https://doi.org/10.1016/j.fochx.2025.102492"
+        },
+        {
+          "putCode": 185360291,
+          "title": "Mathematical modeling of water sorption isotherms in specialty coffee beans processed by wet and semidry postharvest methods",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Scientific Reports",
+          "doi": "10.1038/s41598-024-83702-y",
+          "url": "https://doi.org/10.1038/s41598-024-83702-y"
+        },
+        {
+          "putCode": 185360300,
+          "title": "Method for Computer-Aided Modeling of Water Adsorption Isotherms in Achira Biscuits (Canna Edulis K.)",
+          "year": 2025,
+          "type": "Otro",
+          "journal": "Ssrn",
+          "doi": "10.2139/ssrn.5128073",
+          "url": "https://doi.org/10.2139/ssrn.5128073"
+        },
+        {
+          "putCode": 185360298,
+          "title": "Model Based Investigation of Water Desorption and Infrared Spectral Properties in Cupuassu (Theobroma Grandiflorum L.) Pulp",
+          "year": 2025,
+          "type": "Otro",
+          "journal": "Ssrn",
+          "doi": "10.2139/ssrn.5154379",
+          "url": "https://doi.org/10.2139/ssrn.5154379"
+        },
+        {
+          "putCode": 178036255,
+          "title": "Predictive model of moisture content in dry parchment coffee beans using near-infrared spectroscopy (FT-NIR)",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Coffee Science",
+          "doi": "10.25186/.v20i.2289",
+          "url": "https://doi.org/10.25186/.v20i.2289"
+        },
+        {
+          "putCode": 185360289,
+          "title": "Relationship between physicochemical properties of roasted cocoa beans and climate patterns: Quality and safety implications",
+          "year": 2025,
+          "type": "Artículo",
+          "journal": "Lwt",
+          "doi": "10.1016/j.lwt.2025.117320",
+          "url": "https://doi.org/10.1016/j.lwt.2025.117320"
+        },
+        {
+          "putCode": 168082772,
+          "title": "Water sorption isotherms and mid-infrared spectra of dried parchment coffee beans (Coffee arabica L.) processed by wet and semi-dry postharvest methods. A dataset for estimating water sorption and thermodynamic properties.",
+          "year": 2024,
+          "type": "Artículo",
+          "journal": "Data in Brief",
+          "doi": "10.1016/j.dib.2024.110958",
+          "url": "https://doi.org/10.1016/j.dib.2024.110958"
+        },
+        {
+          "putCode": 185360292,
+          "title": "Challenges in coffee fermentation technologies: bibliometric analysis and critical review",
+          "year": 2024,
+          "type": "Artículo",
+          "journal": "Journal of Food Science and Technology",
+          "doi": "10.1007/s13197-024-06054-5",
+          "url": "https://doi.org/10.1007/s13197-024-06054-5"
+        },
+        {
+          "putCode": 185360288,
+          "title": "Effects of cherries Sanitization methods and fermentation times on quality parameters of coffee beans",
+          "year": 2024,
+          "type": "Artículo",
+          "journal": "Heliyon",
+          "doi": "10.1016/j.heliyon.2024.e33508",
+          "url": "https://doi.org/10.1016/j.heliyon.2024.e33508"
+        }
+      ]
+    }
+  }
+}

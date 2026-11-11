@@ -1,7 +1,9 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router';
 import {
+  ORCID_SYNCED_AT,
   PURPOSE_CARDS,
   RESEARCHERS,
   TIMELINE_MILESTONES,
@@ -432,46 +434,36 @@ function ResearchersCarousel() {
                   aria-hidden={!isCenter}
                   onClick={() => go(pos - 1)}
                 >
-                  
-<div className="researcher-card__photo">
-  {r.image ? (
-    <img
-      src={r.image}
-      alt={`Fotografía de ${r.name}`}
-      loading="lazy"
-    />
-  ) : (
-    <span className="researcher-card__initials">
-      {r.initials}
-    </span>
-  )}
-</div>
-
-<div className="researcher-card__body">
-  <span className="eyebrow">
-    {r.role}
-  </span>
-
-  <h3 className="researcher-card__name">
-    {r.name}
-  </h3>
-
-  <p className="researcher-card__role">
-    {r.profession}
-  </p>
-
-  {r.academicDegree && (
-    <p className="researcher-card__role">
-      {r.academicDegree}
-    </p>
-  )}
-
-  {r.researchArea && (
-    <p className="researcher-card__role">
-      Área: {r.researchArea}
-    </p>
-  )}
-</div>
+                  <div className="researcher-card__photo">
+                    {r.image ? (
+                      <img src={r.image} alt={`Fotografía de ${r.name}`} loading="lazy" />
+                    ) : (
+                      <span className="researcher-card__initials">{r.initials}</span>
+                    )}
+                  </div>
+                  <div className="researcher-card__body">
+                    <span className="eyebrow">{r.role}</span>
+                    <h3 className="researcher-card__name">{r.name}</h3>
+                    <p className="researcher-card__role">
+                      {[r.profession, r.academicDegree].filter(Boolean).join(' · ')}
+                    </p>
+                    {r.researchArea && (
+                      <p className="researcher-card__area">Área: {r.researchArea}</p>
+                    )}
+                    {r.orcid && (
+                      <a
+                        className="orcid-badge"
+                        href={`https://orcid.org/${r.orcid}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        tabIndex={isCenter ? 0 : -1}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="orcid-badge__label">iD</span>
+                        {r.orcid}
+                      </a>
+                    )}
+                  </div>
                 </article>
               );
             })}
@@ -486,8 +478,121 @@ function ResearchersCarousel() {
             ▶
           </button>
         </div>
+
+        <ResearcherProfile researcher={RESEARCHERS[active]} />
       </div>
     </section>
+  );
+}
+
+const MAX_VISIBLE_WORKS = 6;
+
+/** Ficha del investigador activo: biografía, palabras clave y trabajos públicos de ORCID. */
+function ResearcherProfile({ researcher }) {
+  const { profile, repoPublications, orcid, name } = researcher;
+  const works = profile?.works ?? [];
+  const syncedAt = ORCID_SYNCED_AT
+    ? new Date(ORCID_SYNCED_AT).toLocaleDateString('es-CO', { dateStyle: 'medium' })
+    : null;
+
+  return (
+    <article className="researcher-profile" aria-live="polite" data-reveal>
+      <header className="researcher-profile__header">
+        <div>
+          <span className="eyebrow">Perfil del investigador</span>
+          <h3 className="researcher-profile__name">{name}</h3>
+          {profile?.affiliation && (
+            <p className="researcher-profile__affiliation">
+              {[profile.affiliation.role, profile.affiliation.department, profile.affiliation.organization]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
+          )}
+        </div>
+        {profile && (
+          <div className="researcher-profile__stat">
+            <strong>{profile.worksCount}</strong>
+            <span>{profile.worksCount === 1 ? 'trabajo en ORCID' : 'trabajos en ORCID'}</span>
+          </div>
+        )}
+      </header>
+
+      {profile?.biography && <p className="researcher-profile__bio">{profile.biography}</p>}
+
+      {profile?.keywords?.length > 0 && (
+        <ul className="researcher-profile__keywords" aria-label="Palabras clave">
+          {profile.keywords.map((k) => (
+            <li key={k} className="pill pill--light">
+              {k}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {works.length > 0 ? (
+        <ol className="researcher-profile__works">
+          {works.slice(0, MAX_VISIBLE_WORKS).map((w) => (
+            <li key={w.putCode ?? w.title} className="researcher-work">
+              <span className="researcher-work__year">{w.year ?? 's. f.'}</span>
+              <div className="researcher-work__body">
+                <p className="researcher-work__title">{w.title}</p>
+                <p className="researcher-work__meta">
+                  {[w.type, w.journal].filter(Boolean).join(' · ')}
+                </p>
+                <div className="researcher-work__links">
+                  {w.repoId && (
+                    <Link to={`/repositorio?q=${encodeURIComponent(w.repoTitle)}`}>
+                      Ver en el repositorio →
+                    </Link>
+                  )}
+                  {w.url && (
+                    <a href={w.url} target="_blank" rel="noopener noreferrer">
+                      {w.doi ? `DOI ${w.doi}` : 'Ver publicación'} ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      ) : repoPublications.length > 0 ? (
+        <ol className="researcher-profile__works">
+          {repoPublications.map((p) => (
+            <li key={p.id} className="researcher-work">
+              <span className="researcher-work__year">{p.year}</span>
+              <div className="researcher-work__body">
+                <p className="researcher-work__title">{p.title}</p>
+                <p className="researcher-work__meta">{p.type}</p>
+                <div className="researcher-work__links">
+                  <Link to={`/repositorio?q=${encodeURIComponent(p.title)}`}>
+                    Ver en el repositorio →
+                  </Link>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="researcher-profile__empty">
+          Aún no hay publicaciones vinculadas a este investigador.
+        </p>
+      )}
+
+      <footer className="researcher-profile__footer">
+        {orcid ? (
+          <>
+            <a href={`https://orcid.org/${orcid}`} target="_blank" rel="noopener noreferrer">
+              {works.length > MAX_VISIBLE_WORKS
+                ? `Ver los ${works.length} trabajos en ORCID ↗`
+                : 'Ver perfil completo en ORCID ↗'}
+            </a>
+            {syncedAt && <span>Datos públicos de ORCID · actualizados el {syncedAt}</span>}
+          </>
+        ) : (
+          <span>Perfil ORCID pendiente de vincular.</span>
+        )}
+      </footer>
+    </article>
   );
 }
 

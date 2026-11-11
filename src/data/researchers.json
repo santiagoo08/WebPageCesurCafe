@@ -1,0 +1,35 @@
+[
+  {
+    "id": "juan-soto",
+    "name": "Juan Eduardo Soto Mora",
+    "role": "Investigador del centro",
+    "profession": "Ingeniero Agrícola",
+    "academicDegree": "Posgrado",
+    "researchArea": "Ciencia de los alimentos",
+    "image": "/images/juan-soto.jpg",
+    "initials": "JS",
+    "orcid": "0000-0001-5079-7968"
+  },
+  {
+    "id": "pilar-cortes",
+    "name": "María del Pilar Cortés Gaona",
+    "role": "Coordinadora del centro",
+    "profession": "Ingeniera Agrícola",
+    "academicDegree": "Posgrado",
+    "researchArea": "Procesamiento de alimentos",
+    "image": "/images/pilar-cortes.jpg",
+    "initials": "PC",
+    "orcid": "0000-0001-7654-3659"
+  },
+  {
+    "id": "nelson-gutierrez",
+    "name": "Nelson Gutiérrez Guzmán",
+    "role": "Director del centro",
+    "profession": "Ingeniero Agrícola",
+    "academicDegree": "Doctorado",
+    "researchArea": "Alternativas sostenibles",
+    "image": "/images/nelson-gutierrez.jpg",
+    "initials": "NG",
+    "orcid": "0000-0003-2499-8066"
+  }
+]
