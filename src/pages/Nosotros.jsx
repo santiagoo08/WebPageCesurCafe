@@ -535,7 +535,8 @@ function ResearcherProfile({ researcher }) {
             <li key={w.putCode ?? w.title} className="researcher-work">
               <span className="researcher-work__year">{w.year ?? 's. f.'}</span>
               <div className="researcher-work__body">
-                <p className="researcher-work__title">{w.title}</p>
+                <p className="researcher-work__title">{w.titleEs ?? w.title}</p>
+                {w.titleEs && <p className="researcher-work__original">{w.title}</p>}
                 <p className="researcher-work__meta">
                   {[w.type, w.journal].filter(Boolean).join(' · ')}
                 </p>
@@ -557,11 +558,11 @@ function ResearcherProfile({ researcher }) {
         </ol>
       ) : repoPublications.length > 0 ? (
         <ol className="researcher-profile__works">
-          {repoPublications.map((p) => (
+          {repoPublications.slice(0, MAX_VISIBLE_WORKS).map((p) => (
             <li key={p.id} className="researcher-work">
               <span className="researcher-work__year">{p.year}</span>
               <div className="researcher-work__body">
-                <p className="researcher-work__title">{p.title}</p>
+                <p className="researcher-work__title">{p.titleEs ?? p.title}</p>
                 <p className="researcher-work__meta">{p.type}</p>
                 <div className="researcher-work__links">
                   <Link to={`/repositorio?q=${encodeURIComponent(p.title)}`}>

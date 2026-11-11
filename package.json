@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "sync:orcid": "node scripts/sync-orcid.mjs"
+    "sync:orcid": "node scripts/sync-orcid.mjs",
+    "sync:openalex": "node scripts/sync-openalex.mjs",
+    "sync:data": "npm run sync:orcid && npm run sync:openalex"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

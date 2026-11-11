@@ -5,7 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   FEATURED_PROJECTS,
   PUBLICATIONS,
+  PUBLICATION_TYPES,
   SERVICES,
+  publicationUrl,
 } from '../data/institutional';
 import AgroClimaPanel from '../components/AgroClimaPanel';
 import PublicationCard from '../components/PublicationCard';
@@ -18,7 +20,7 @@ gsap.registerPlugin(ScrollTrigger);
 const VIDEO_SRC = '/videos/cafe.mp4';
 const BODY_CLASS = 'has-video-bg';
 const AUTOPLAY_MS = 7000;
-const REPO_TABS = ['Recientes', 'Artículos', 'Libros', 'Cartillas Rurales'];
+const REPO_TABS = ['Recientes', ...PUBLICATION_TYPES.slice(0, 3)];
 
 /** Fondo de video fijo + titular de bienvenida que se desvanece con el scroll. */
 function VideoHero() {
@@ -156,10 +158,45 @@ function HeroCarousel() {
           </div>
 
           <div className="hero__content" key={project.id} aria-live="polite">
-            <span className="eyebrow">Proyecto {String(index + 1).padStart(2, '0')}</span>
+            <span className="eyebrow">
+              Proyecto {String(index + 1).padStart(2, '0')}
+              {project.publication?.year && ` · ${project.publication.year}`}
+            </span>
             <h2 className="hero__title">{project.title}</h2>
             <p className="hero__desc">{project.description}</p>
+            {project.publication && (
+              <p className="hero__meta">
+                {project.researchers.length > 0 && (
+                  <>
+                    Investigadores del centro: <strong>{project.researchers.join(', ')}</strong>
+                    <br />
+                  </>
+                )}
+                Publicado en {project.publication.journal}
+                {project.publication.license && ` · ${project.publication.license}`} ·{' '}
+                <a href={publicationUrl(project.publication)} target="_blank" rel="noopener noreferrer">
+                  Ver investigación ↗
+                </a>
+              </p>
+            )}
           </div>
+
+          {project.image && (
+            <figure className="hero__media" key={`${project.id}-img`}>
+              <img src={project.image.src} alt={project.image.alt} loading="lazy" />
+              <figcaption>
+                Foto:{' '}
+                <a href={project.image.sourceUrl} target="_blank" rel="noopener noreferrer">
+                  {project.image.credit}
+                </a>{' '}
+                ·{' '}
+                <a href={project.image.licenseUrl} target="_blank" rel="noopener noreferrer">
+                  {project.image.license}
+                </a>{' '}
+                · Wikimedia Commons
+              </figcaption>
+            </figure>
+          )}
 
           <div className="hero__controls">
             <button

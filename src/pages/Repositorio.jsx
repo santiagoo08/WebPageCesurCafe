@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { useSearchParams } from 'react-router';
-import { PUBLICATIONS, normalizeText } from '../data/institutional';
+import { PUBLICATIONS, PUBLICATION_TYPES, normalizeText } from '../data/institutional';
 import PublicationCard from '../components/PublicationCard';
 import Icon from '../components/Icon';
 import useScrollReveal, { MOTION_OK, REVEAL_EASE } from '../hooks/useScrollReveal';
@@ -10,8 +10,8 @@ import './Repositorio.css';
 
 gsap.registerPlugin(Flip);
 
-const TABS = ['Todos', 'Artículos', 'Libros', 'Cartillas Rurales', 'Investigaciones'];
-const PAGE_SIZE = 6;
+const TABS = ['Todos', ...PUBLICATION_TYPES];
+const PAGE_SIZE = 9;
 const CELL = '.explorer__cell';
 
 const motionOk = () => window.matchMedia(MOTION_OK).matches;
@@ -36,7 +36,11 @@ export default function Repositorio() {
     return PUBLICATIONS.filter((p) => {
       const matchesTab = tab === 'Todos' || p.type === tab;
       const matchesQuery =
-        !q || normalizeText(p.title).includes(q) || normalizeText(p.author).includes(q);
+        !q ||
+        normalizeText(p.title).includes(q) ||
+        normalizeText(p.titleEs ?? '').includes(q) ||
+        normalizeText(p.author).includes(q) ||
+        normalizeText(p.journal ?? '').includes(q);
       return matchesTab && matchesQuery;
     });
   }, [query, tab]);
@@ -149,7 +153,7 @@ export default function Repositorio() {
                 type="search"
                 value={query}
                 onChange={(e) => changeQuery(e.target.value)}
-                placeholder="Buscar por título o autor..."
+                placeholder="Buscar por título, autor o revista..."
               />
             </label>
           </div>

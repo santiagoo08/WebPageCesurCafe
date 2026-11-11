@@ -385,3 +385,18 @@ La página de **Inicio** incluye el panel **"Monitoreo agroclimático del Huila"
 Además, el panel calcula una **recomendación orientativa de secado del café** según la probabilidad y cantidad de lluvia de cada día. Las respuestas se guardan en caché 10 minutos para no repetir llamadas. Si la API falla, se muestra un mensaje con el botón "Reintentar".
 
 Para comprobar la llamada: abre la página de Inicio, presiona F12 → pestaña **Red (Network)** y busca la petición a `api.open-meteo.com`.
+
+---
+
+##  Repositorio real (API OpenAlex)
+
+El repositorio del sitio (`src/data/publications.json`) contiene publicaciones científicas reales obtenidas de [OpenAlex](https://openalex.org), un catálogo abierto (datos CC0) y gratuito:
+
+1. Todos los trabajos donde algún autor declara afiliación a **CESURCAFÉ**.
+2. Los trabajos sobre café de los investigadores de `src/data/researchers.json` (por su ORCID).
+
+Para actualizarlo: `npm run sync:openalex` (o `npm run sync:data` para ORCID + OpenAlex). Funciona sin clave; una clave gratuita de OpenAlex (`OPENALEX_API_KEY`) da un cupo diario mayor. El procesamiento está en `scripts/openalex-parse.mjs`: clasifica tipo y área, marca acceso abierto y licencia, enlaza a los investigadores del sitio y une duplicados (artículo + conjunto de datos en Figshare/Mendeley).
+
+Los títulos se muestran **en español** (traducción no oficial en `src/data/publication-translations.json`) con el título original debajo. La sincronización no toca ese archivo: al llegar publicaciones nuevas, agrega su traducción con el mismo `id`; mientras tanto se muestra el título original.
+
+Los **proyectos destacados** del carrusel de Inicio (`FEATURED_PROJECTS` en `institutional.js`) apuntan a publicaciones de este repositorio. Sus imágenes son de Wikimedia Commons con licencia libre y muestran autor y licencia junto a la foto; para cambiarlas, reemplaza el bloque `image` por una foto propia del centro.

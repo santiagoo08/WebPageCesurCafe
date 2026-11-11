@@ -481,6 +481,11 @@ a:focus {
 .tone-educacion-rural { --tone-a: #D9B07C; --tone-b: #6E655F; }
 .tone-poscosecha    { --tone-a: #B8332A; --tone-b: #6E3B1F; }
 .tone-sensorial     { --tone-a: #C88A4B; --tone-b: #B8332A; }
+.tone-fermentacion  { --tone-a: #C88A4B; --tone-b: #6E3B1F; }
+.tone-calidad-sensorial { --tone-a: #C88A4B; --tone-b: #B8332A; }
+.tone-espectroscopia { --tone-a: #6F7FA8; --tone-b: #1C1613; }
+.tone-inocuidad     { --tone-a: #7E8C4A; --tone-b: #2A221E; }
+.tone-agroindustria { --tone-a: #D9B07C; --tone-b: #6E655F; }
 
 /* ---- Utilidades ---- */
 .visually-hidden {
@@ -1372,4 +1377,68 @@ a:focus {
   border-radius: var(--radius-pill);
   gap: 0.35rem;
   flex-shrink: 0;
+}
+
+/* ---- Tarjetas de publicaciones reales (OpenAlex) ---- */
+.pub-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.pub-card__badges:empty {
+  display: none;
+}
+
+.pub-card__badges .pub-card__status {
+  margin: 0;
+}
+
+.pub-card__status--acceso-abierto {
+  background: rgba(76, 175, 80, 0.16);
+  color: #9fdca2;
+}
+
+.pub-card__status--acceso-restringido {
+  background: rgba(243, 237, 226, 0.08);
+  color: var(--text-secondary);
+}
+
+.pub-card__status--centro {
+  background: rgba(200, 138, 75, 0.18);
+  color: var(--accent-secondary);
+}
+
+.pub-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pub-card__title a:hover,
+.pub-card__title a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pub-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pub-card__links a {
+  color: var(--accent-secondary);
+}
+
+.pub-card__original {
+  margin: -0.35rem 0 0.6rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  opacity: 0.85;
 }

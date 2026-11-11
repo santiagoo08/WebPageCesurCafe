@@ -147,7 +147,8 @@ export function parseRecord(orcid, record) {
     orcid,
     url: `https://orcid.org/${orcid}`,
     name: credit || `${given} ${family}`.trim() || null,
-    biography: person.biography?.content ?? null,
+    // Solo el primer párrafo: algunas biografías son muy largas para la ficha.
+    biography: person.biography?.content?.split(/\n\s*\n/)[0]?.trim() || null,
     keywords: (person.keywords?.keyword ?? []).map((k) => k.content).filter(Boolean),
     affiliation: current,
     worksCount: uniqueWorks.length,

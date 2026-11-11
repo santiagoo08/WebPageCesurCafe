@@ -1,7 +1,14 @@
 // Catálogo estático de datos institucionales, navegación, proyectos y publicaciones.
-import rawPublications from './publications.json';
+import publicationsJson from './publications.json';
+import publicationTranslations from './publication-translations.json';
 import rawResearchers from './researchers.json';
 import orcidData from './orcid-profiles.json';
+
+// Publicaciones con su título traducido al español (si existe en publication-translations.json).
+const rawPublications = publicationsJson.map((p) => ({
+  ...p,
+  titleEs: publicationTranslations.titles?.[p.id] ?? null,
+}));
 
 // ---------------------------------------------------------------------------
 // Navegación y Redes Sociales
@@ -23,23 +30,65 @@ export const SOCIAL_LINKS = [
 // ---------------------------------------------------------------------------
 // Inicio: Proyectos destacados y Propósito institucional
 // ---------------------------------------------------------------------------
-export const FEATURED_PROJECTS = [
+// Proyectos destacados del carrusel de Inicio: cada uno se basa en una publicación real
+// del repositorio (afiliada a CESURCAFÉ). Las imágenes vienen de Wikimedia Commons con
+// licencia libre; el crédito y la licencia se muestran junto a la imagen.
+const PROJECT_DEFINITIONS = [
   {
-    id: 'monitoreo-agricola',
-    title: 'Sistema de monitoreo agrícola',
-    description: 'Sensores de campo aplicados al seguimiento de cultivos en la región.',
+    id: 'monitoreo-humedad-ftnir',
+    title: 'Monitoreo de humedad del café con espectroscopía FT-NIR',
+    description:
+      'Espectros de infrarrojo cercano tomados al café pergamino durante el secado para calibrar modelos que predicen su humedad de forma rápida y no destructiva.',
+    publicationId: 'oa-W4408039516',
+    image: {
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/NP_colombia_coffee_drying_%285867167147%29.jpg/1280px-NP_colombia_coffee_drying_%285867167147%29.jpg',
+      alt: 'Caficultor secando café al sol en el Cauca, Colombia',
+      credit: 'Neil Palmer (CIAT)',
+      license: 'CC BY-SA 2.0',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:NP_colombia_coffee_drying_(5867167147).jpg',
+    },
   },
   {
-    id: 'fermentacion-controlada',
-    title: 'Fermentación controlada de cafés especiales',
-    description: 'Protocolos de fermentación que potencian el perfil sensorial del café huilense.',
+    id: 'fermentacion-bal-levaduras',
+    title: 'Fermentación con bacterias lácticas y levaduras',
+    description:
+      'Inoculación de bacterias ácido lácticas y levaduras durante la fermentación para evaluar su efecto en la calidad sensorial del café arábica.',
+    publicationId: 'oa-W4415886225',
+    image: {
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pulped_coffee_berries.JPG/1280px-Pulped_coffee_berries.JPG',
+      alt: 'Granos de café recién despulpados, listos para fermentar',
+      credit: 'Erinamukuta',
+      license: 'CC BY-SA 4.0',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Pulped_coffee_berries.JPG',
+    },
   },
   {
-    id: 'cartillas-rurales',
-    title: 'Cartillas rurales digitales',
-    description: 'Material formativo accesible para las familias caficultoras del sur del Huila.',
+    id: 'valorizacion-pulpa',
+    title: 'Valorización de la pulpa de café',
+    description:
+      'Aprovechamiento de la pulpa, un subproducto del beneficio, en bebidas de cápsulas compostables, evaluando el perfil de tostión y el grado de molienda.',
+    publicationId: 'oa-W7167057776',
+    image: {
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Coffee_Processing_%E2%80%93_Discarded_pulp.jpg/1280px-Coffee_Processing_%E2%80%93_Discarded_pulp.jpg',
+      alt: 'Pulpa de café separada del grano durante el despulpado',
+      credit: 'Ludger001',
+      license: 'CC BY-SA 4.0',
+      licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+      sourceUrl: 'https://commons.wikimedia.org/wiki/File:Coffee_Processing_%E2%80%93_Discarded_pulp.jpg',
+    },
   },
 ];
+
+export const FEATURED_PROJECTS = PROJECT_DEFINITIONS.map((p) => {
+  const publication = rawPublications.find((pub) => pub.id === p.publicationId) ?? null;
+  const researchers = (publication?.researcherIds ?? [])
+    .map((id) => rawResearchers.find((r) => r.id === id)?.name)
+    .filter(Boolean);
+  return { ...p, publication, researchers };
+});
+
 
 export const PURPOSE_CARDS = [
   {
@@ -238,7 +287,7 @@ export const ORCID_SYNCED_AT = orcidData.generatedAt ?? null;
 export const RESEARCHERS = rawResearchers.map((r) => {
   const orcid = String(r.orcid ?? '').trim().toUpperCase();
   const profile = orcid ? (orcidData.profiles?.[orcid] ?? null) : null;
-  const repoPublications = rawPublications.filter((p) => p.author === r.name);
+  const repoPublications = rawPublications.filter((p) => p.researcherIds?.includes(r.id));
   return {
     ...r,
     orcid: orcid || null,
@@ -247,7 +296,7 @@ export const RESEARCHERS = rawResearchers.map((r) => {
           ...profile,
           works: (profile.works ?? []).map((w) => {
             const repo = matchRepository(w);
-            return { ...w, repoId: repo?.id ?? null, repoTitle: repo?.title ?? null };
+            return { ...w, repoId: repo?.id ?? null, repoTitle: repo?.title ?? null, titleEs: repo?.titleEs ?? null };
           }),
         }
       : null,
@@ -276,6 +325,28 @@ export const RESEARCH_LINES = [
 // Publicaciones y utilidades de texto
 // ---------------------------------------------------------------------------
 export const PUBLICATIONS = rawPublications;
+
+/** Tipos de publicación presentes en el repositorio, en orden fijo. */
+export const PUBLICATION_TYPES = ['Artículos', 'Datos', 'Libros', 'Ponencias', 'Preprints'].filter((t) =>
+  rawPublications.some((p) => p.type === t),
+);
+
+/** Título para mostrar: la traducción al español si existe; si no, el original. */
+export function displayTitle(p) {
+  return p.titleEs ?? p.title;
+}
+
+/** Enlace principal de una publicación: su DOI o, si no tiene, la página del editor. */
+export function publicationUrl(p) {
+  return p.doi ? `https://doi.org/${p.doi}` : (p.landingUrl ?? null);
+}
+
+/** Línea de contexto de la tarjeta: revista y licencia. */
+export function publicationSummary(p) {
+  return [p.journal && `Publicado en ${p.journal}`, p.license && `Licencia ${p.license}`]
+    .filter(Boolean)
+    .join(' · ');
+}
 
 export function typeLabel(type) {
   return type === 'Investigaciones' ? 'Investigación' : type;

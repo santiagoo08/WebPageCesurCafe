@@ -59,7 +59,7 @@ ${SERVICES.map((s) => `  * ${s.title}: ${s.description}`).join('\n')}
 - Proyectos destacados:
 ${FEATURED_PROJECTS.map((p) => `  * ${p.title}: ${p.description}`).join('\n')}
 - Publicaciones destacadas en repositorio:
-${PUBLICATIONS.slice(0, 6).map((pub) => `  * "${pub.title}" (${pub.type}, ${pub.year}) - ${pub.author}`).join('\n')}
+${PUBLICATIONS.slice(0, 6).map((pub) => `  * "${pub.titleEs ?? pub.title}" (${pub.type}, ${pub.year}) - ${pub.author}`).join('\n')}
 
 REGLA FUNDAMENTAL DE ALCANCE Y RETORNO AL MENÚ PRINCIPAL:
 1. Tu conocimiento y campo de acción se limitan EXCLUSIVAMENTE a CESURCAFÉ, la caficultura, la investigación agronómica, la fermentación, calidad de taza y proyectos del centro.
@@ -116,27 +116,27 @@ const LINEAS_DETAILS = [
   {
     summary:
       'Evaluación física del grano verde/pergamino, granulometría, humedad y catación bajo protocolos internacionales SCA para identificar y valorizar perfiles diferenciados del Huila.',
-    pubIds: ['pub-09', 'pub-02'],
+    areas: ['Calidad sensorial', 'Espectroscopía'],
   },
   {
     summary:
       'Aislamiento de levaduras nativas, estudio de microbiota y diseño de protocolos de fermentación controlada monitoreando pH, temperatura y grados Brix.',
-    pubIds: ['pub-01', 'pub-06', 'pub-13'],
+    areas: ['Fermentación'],
   },
   {
     summary:
       'Diagnóstico fisicoquímico de fertilidad en suelos cafeteros de ladera y manejo integrado de limitantes fitosanitarias como la broca y la roya del cafeto.',
-    pubIds: ['pub-03', 'pub-07', 'pub-08', 'pub-12'],
+    areas: [],
   },
   {
     summary:
       'Implementación de redes de sensores agroclimáticos en campo y optimización tecnológica de infraestructura poscosecha y secado solar.',
-    pubIds: ['pub-04', 'pub-11'],
+    areas: ['Poscosecha'],
   },
   {
     summary:
       'Programas de extensión rural, talleres prácticos, relevo generacional con jóvenes caficultores y cartillas digitales de acceso abierto.',
-    pubIds: ['pub-05', 'pub-10'],
+    areas: ['Agroindustria'],
   },
 ];
 
@@ -153,9 +153,11 @@ function renderLineasMenu() {
 function renderLineaDetail(index) {
   const title = RESEARCH_LINES[index];
   const detail = LINEAS_DETAILS[index];
-  const relatedPubs = PUBLICATIONS.filter((p) => detail.pubIds.includes(p.id))
-    .map((p) => `• **${p.title}** (${p.type}, ${p.year}) — ${p.author}`)
-    .join('\n');
+  const relatedPubs =
+    PUBLICATIONS.filter((p) => detail.areas.includes(p.area))
+      .slice(0, 3)
+      .map((p) => `• **${p.titleEs ?? p.title}** (${p.journal ?? p.type}, ${p.year}) — ${p.author}`)
+      .join('\n') || '• Aún no hay publicaciones registradas en esta línea.';
 
   return (
     `🌾 **${title}**\n\n` +
@@ -165,11 +167,9 @@ function renderLineaDetail(index) {
   );
 }
 
-const PROJECT_MATCHES = [
-  { pubId: 'pub-04', testimonialIndex: 3 },
-  { pubId: 'pub-02', testimonialIndex: 1 },
-  { pubId: 'pub-05', testimonialIndex: 2 },
-];
+// Testimonio asociado a cada proyecto destacado (índice en TESTIMONIALS o null).
+// Se dejan vacíos: solo deben enlazarse testimonios reales y verificados sobre cada investigación.
+const PROJECT_TESTIMONIALS = [null, null, null];
 
 function renderProyectosMenu() {
   const list = FEATURED_PROJECTS.map((p, idx) => `${idx + 1}. **${p.title}**`).join('\n');
@@ -183,13 +183,16 @@ function renderProyectosMenu() {
 
 function renderProyectoDetail(index) {
   const project = FEATURED_PROJECTS[index];
-  const match = PROJECT_MATCHES[index];
-  const pub = PUBLICATIONS.find((p) => p.id === match.pubId);
-  const testimonial = TESTIMONIALS[match.testimonialIndex];
+  const pub = project.publication;
+  const testimonialIndex = PROJECT_TESTIMONIALS[index];
+  const testimonial = testimonialIndex != null ? TESTIMONIALS[testimonialIndex] : null;
 
   const metaLine = pub
-    ? `• **Estado:** ${pub.status} (${pub.year}) · **Responsable:** ${pub.author}\n` +
-      `• **Enfoque técnico:** ${pub.summary}\n\n`
+    ? `• **Publicación:** ${pub.titleEs ?? pub.title} (${pub.journal}, ${pub.year})\n` +
+      `• **Autores:** ${pub.author}\n` +
+      (project.researchers.length ? `• **Investigadores del centro:** ${project.researchers.join(', ')}\n` : '') +
+      (pub.doi ? `• **DOI:** https://doi.org/${pub.doi}\n` : '') +
+      '\n'
     : '';
   const quoteBlock = testimonial
     ? `**Impacto en la comunidad:**\n“${testimonial.quote}” — **${testimonial.author}** (${testimonial.role})\n\n`
@@ -206,9 +209,9 @@ function renderProyectoDetail(index) {
 
 const REPO_CATEGORIES = [
   { label: 'Artículos científicos', filter: (p) => p.type === 'Artículos' },
-  { label: 'Libros', filter: (p) => p.type === 'Libros' },
-  { label: 'Cartillas Rurales', filter: (p) => p.type === 'Cartillas Rurales' },
-  { label: 'Investigaciones', filter: (p) => p.type === 'Investigaciones' },
+  { label: 'Conjuntos de datos', filter: (p) => p.type === 'Datos' },
+  { label: 'Libros y ponencias', filter: (p) => p.type === 'Libros' || p.type === 'Ponencias' },
+  { label: 'Fermentación', filter: (p) => p.area === 'Fermentación' },
   { label: 'Publicaciones recientes (2026)', filter: (p) => p.year === 2026 },
 ];
 
@@ -228,9 +231,11 @@ function renderRepositorioMenu() {
 
 function renderRepositorioDetail(index) {
   const category = REPO_CATEGORIES[index];
-  const items = PUBLICATIONS.filter(category.filter)
-    .map((p) => `• **${p.title}** (${p.year}, ${p.status}) — ${p.author}\n  ${p.summary}`)
-    .join('\n\n');
+  const all = PUBLICATIONS.filter(category.filter);
+  const items = all
+    .slice(0, 6)
+    .map((p) => `• **${p.titleEs ?? p.title}** (${p.journal ?? p.type}, ${p.year}) — ${p.author}`)
+    .join('\n\n') + (all.length > 6 ? `\n\n…y ${all.length - 6} más.` : '');
 
   return (
     `📚 **${category.label}**\n\n` +
@@ -272,9 +277,14 @@ function renderNosotrosDetail(index) {
   }
 
   const team = RESEARCHERS.map((r) => {
-    const pubs = PUBLICATIONS.filter((p) => p.author === r.name)
-      .map((p) => `"${p.title}" (${p.year})`)
-      .join(', ');
+    const own = PUBLICATIONS.filter((p) => p.researcherIds?.includes(r.id));
+    const pubs = own.length
+      ? `${own.length} ${own.length === 1 ? 'publicación' : 'publicaciones'}; recientes: ` +
+        own
+          .slice(0, 2)
+          .map((p) => `"${p.titleEs ?? p.title}" (${p.year})`)
+          .join(', ')
+      : '';
     const pubText = pubs ? ` — Publicaciones: ${pubs}` : '';
     return `• **${r.name}** — ${r.role}${pubText}`;
   }).join('\n');

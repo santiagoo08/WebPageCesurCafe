@@ -252,6 +252,72 @@
   margin-top: 2.5rem;
 }
 
+/* Imagen del proyecto (lado derecho del carrusel) */
+.hero__meta {
+  max-width: 32rem;
+  margin: 1.25rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.hero__meta a {
+  color: var(--accent-secondary);
+}
+
+.hero__media {
+  position: absolute;
+  top: clamp(1.5rem, 4vw, 3rem);
+  right: clamp(1.5rem, 4vw, 3rem);
+  bottom: clamp(1.5rem, 4vw, 3rem);
+  width: min(36%, 420px);
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: hero-in 0.7s ease both;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__media figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.75rem 0.9rem 0.6rem;
+  font-size: 0.7rem;
+  color: rgba(246, 244, 240, 0.85);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+}
+
+.hero__media figcaption a {
+  color: inherit;
+}
+
+.hero__box:has(.hero__media) .hero__content {
+  max-width: min(44rem, 58%);
+}
+
+.hero__box:has(.hero__media) .hero__rings {
+  display: none;
+}
+
+@media screen and (max-width: 63.99875em) {
+  .hero__media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 240px;
+    margin-top: 1.5rem;
+  }
+
+  .hero__box:has(.hero__media) .hero__content {
+    max-width: none;
+  }
+}
+
 /* ---- 2. Banner "Conoce más sobre nosotros" ---- */
 .about-banner__card {
   gap: 2rem;

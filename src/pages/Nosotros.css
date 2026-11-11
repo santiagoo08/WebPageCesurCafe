@@ -706,3 +706,10 @@
     text-align: left;
   }
 }
+
+.researcher-work__original {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}

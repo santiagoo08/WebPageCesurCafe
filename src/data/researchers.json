@@ -31,5 +31,27 @@
     "image": "/images/nelson-gutierrez.jpg",
     "initials": "NG",
     "orcid": "0000-0003-2499-8066"
+  },
+  {
+    "id": "andres-bahamon",
+    "name": "Andrés Felipe Bahamón Monje",
+    "role": "Investigador del centro",
+    "profession": "Ingeniero Agrícola",
+    "academicDegree": "Maestría en Ciencia y Tecnología del Café",
+    "researchArea": "Calidad, poscosecha y quimiometría del café",
+    "image": "",
+    "initials": "AB",
+    "orcid": "0000-0002-2620-148X"
+  },
+  {
+    "id": "wilmer-ladino",
+    "name": "Wilmer Licerio Ladino Garzón",
+    "role": "Investigador científico",
+    "profession": "",
+    "academicDegree": "",
+    "researchArea": "Fermentación y calidad del café",
+    "image": "",
+    "initials": "WL",
+    "orcid": "0000-0002-9997-6438"
   }
 ]
