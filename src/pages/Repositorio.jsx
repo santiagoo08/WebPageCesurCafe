@@ -185,7 +185,7 @@ export default function Repositorio() {
             >
               {shown.map((pub) => (
                 <div className="cell explorer__cell" key={pub.id}>
-                  <PublicationCard publication={pub} showStatus />
+                  <PublicationCard publication={pub} showStatus showCover={false} />
                 </div>
               ))}
             </div>

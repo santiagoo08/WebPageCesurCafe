@@ -1,6 +1,6 @@
 import { displayTitle, publicationSummary, publicationUrl, slugify, typeLabel } from '../data/institutional';
 
-export default function PublicationCard({ publication, showStatus = false }) {
+export default function PublicationCard({ publication, showStatus = false, showCover = true }) {
   const { title, titleEs, area, type, status, year, author, pdfUrl, datasetDoi, cesurcafeAffiliation } = publication;
   const shownTitle = displayTitle(publication);
   const url = publicationUrl(publication);
@@ -8,12 +8,20 @@ export default function PublicationCard({ publication, showStatus = false }) {
 
   return (
     <article className="pub-card">
-      <div className={`pub-card__cover tone-${slugify(area)}`}>
-        <span className="pill pill--light">{area}</span>
-        <span className="pill pill--caramel">{typeLabel(type)}</span>
-      </div>
+      {showCover && (
+        <div className={`pub-card__cover tone-${slugify(area)}`}>
+          <span className="pill pill--light">{area}</span>
+          <span className="pill pill--caramel">{typeLabel(type)}</span>
+        </div>
+      )}
       <div className="pub-card__body">
         <div className="pub-card__badges">
+          {!showCover && (
+            <>
+              <span className="pill pill--light">{area}</span>
+              <span className="pill pill--caramel">{typeLabel(type)}</span>
+            </>
+          )}
           {showStatus && status && (
             <span className={`pub-card__status pub-card__status--${slugify(status)}`}>{status}</span>
           )}
