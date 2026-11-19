@@ -200,8 +200,8 @@ function Testimonials() {
                       Ver en {SOURCE_LABELS[t.source] ?? 'la fuente'} ↗
                     </a>
                   ) : null}
+                  <span className="num-badge">{String(i + 1).padStart(2, '0')}</span>
                 </div>
-                <span className="num-badge">{String(i + 1).padStart(2, '0')}</span>
               </div>
               <div className="testimonial__bottom">
                 <Icon name="quote" size={34} className="testimonial__quote-icon" />

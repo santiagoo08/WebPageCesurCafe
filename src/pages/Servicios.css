@@ -125,35 +125,49 @@
   overflow: hidden;
 }
 
-/* Parte superior clara */
+/* Encabezado compacto de la tarjeta */
 .testimonial__top {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-  padding: 1.5rem 1.6rem;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  padding: 1.15rem 1.4rem;
+  background: linear-gradient(135deg, rgba(200, 138, 75, 0.1), var(--bg-dark-card));
+  border-bottom: 1px solid rgba(200, 138, 75, 0.15);
 }
 
 .testimonial__top-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'category number'
+    'source number';
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.55rem 1rem;
 }
 
 .testimonial__category {
+  grid-area: category;
   color: var(--accent-primary);
 }
 
 .testimonial__link {
+  grid-area: source;
+  justify-self: start;
   padding: 0.4rem 0.85rem;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(243, 237, 226, 0.18);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: rgba(243, 237, 226, 0.78);
   white-space: nowrap;
+}
+
+.testimonial__top .num-badge {
+  grid-area: number;
+  grid-row: 1 / 3;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-color: rgba(200, 138, 75, 0.55);
+  background: rgba(200, 138, 75, 0.08);
+  color: var(--accent-secondary);
+  font-size: 0.9rem;
 }
 
 .testimonial__link:hover {

@@ -381,7 +381,7 @@ export default function Inicio() {
           <div className="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-2 large-up-3">
             {previewItems.map((pub) => (
               <div className="cell" key={pub.id}>
-                <PublicationCard publication={pub} />
+                <PublicationCard publication={pub} showCover={false} />
               </div>
             ))}
           </div>

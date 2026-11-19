@@ -82,7 +82,21 @@ export default function ImageCarousel({
           aria-label={`${i + 1} de ${total}`}
         >
           <img src={img.src} alt={img.alt ?? ''} loading={i === 0 ? 'eager' : 'lazy'} draggable="false" />
-          {img.caption && <figcaption>{img.caption}</figcaption>}
+          {img.credit ? (
+            <figcaption>
+              Foto:{' '}
+              <a href={img.sourceUrl} target="_blank" rel="noopener noreferrer">
+                {img.credit}
+              </a>{' '}
+              ·{' '}
+              <a href={img.licenseUrl} target="_blank" rel="noopener noreferrer">
+                {img.license}
+              </a>{' '}
+              · Wikimedia Commons
+            </figcaption>
+          ) : (
+            img.caption && <figcaption>{img.caption}</figcaption>
+          )}
         </figure>
       ))}
 
