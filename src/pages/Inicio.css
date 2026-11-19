@@ -305,6 +305,41 @@
   display: none;
 }
 
+@media screen and (min-width: 48em) {
+  .hero__box:has(.hero__media) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(34%, 360px));
+    grid-template-rows: auto auto;
+    column-gap: clamp(2rem, 4vw, 3rem);
+    align-content: space-between;
+  }
+
+  .hero__box:has(.hero__media) .hero__content {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: min(44rem, 100%);
+  }
+
+  .hero__box:has(.hero__media) .hero__controls {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0;
+  }
+
+  .hero__media {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    align-self: stretch;
+    translate: none;
+  }
+}
+
 @media screen and (max-width: 47.99875em) {
   .hero__box {
     height: auto;
